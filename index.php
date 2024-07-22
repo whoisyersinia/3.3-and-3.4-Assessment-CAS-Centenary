@@ -6,49 +6,47 @@ include('./includes/basehead.html');
 ?>
 
 <head>
-	<title>Document</title>
+	<title>Christchurch Adventist School 100</title>
 </head>
 
 <body>
-	<div class="container-fluid overflow-hidden px-4 py-5 bg-dark w-100 shadow-lg">
-		<div class="row">
-			<div class="col-md-7">
-				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg hover-zoom card_img">
-					<div class="d-flex flex-column h-100 px-4 pt-5 mt-5 text-white text-shadow-1">
-						<ul class="d-flex list-unstyled mt-auto">
-							<li class="me-auto pt-5 mt-5">
-								<img class="rounded-circle border border-white" src="./images/cat_transparent.svg" width="32" height="32" alt="logo" loading="lazy">
-							</li>
-							<li class="d-flex align-items-center">
-								<a class="text-decoration-none text-white pt-5 mt-5"><small>Anicus 2023</small></a>
-							</li>
-						</ul>
+	<?php
+	require_once('header.php');
+	?>
+	<div class="w-100 vh-100 d-flex justify-content-center align-items-center z-0">
+		<div class="container-fluid pt-5">
+			<div class="row">
+				<div class="col-md-6 col-sm-3">
+					<div class="px-5 text-left content">
+						<div class="hstack gap-3">
+							<p class="lead text-primary mb-4 text-shadow-1">100 Years</p>
+							<div class="vr mb-4"></div>
+							<p class="lead mb-4 text-primary text-shadow-1 fw-bold">Of Christian Values</p>
+						</div>
 					</div>
-
+					<main class="bg-text">
+						<div class="px-5 text-left content text-primary gap-0">
+							<h1 class="fw-bold main-text start_fade-left m-0">Respect</h1>
+							<h1 class="fw-bold main-text start_fade-left m-0 strokeme">Excellence</h1>
+							<h1 class="fw-bold main-text start_fade-left m-0 strokeme">Responsibility</h1>
+							<h1 class="fw-bold main-text start_fade-left m-0 strokeme">Integrity</h1>
+						</div>
+						<div class="px-5 my-5 content">
+							<button type='button' class='btn btn-primary btn-rounded btn-lg px-4' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up'>Former students?</button>
+							<button type='button' class='btn btn-outline-primary btn-rounded btn-lg px-5' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up'>Visit the Store</button>
+						</div>
+					</main>
 				</div>
-			</div>
-			<div class="col-md-5 text-end m-0 fade-right reveal_once">
-				<h2 class="fw-bold ">Welcome to the <span class="text-white text_effect">World of Anime.</span></h2>
-				<p>Anime is a type of animation originating from Japan. It has a wide range of genres for all type of viewers, including, but not limted to: <span class="fw-bold">action, drama, romance, comedy, horror, fantasy, sports, sci-fi, 'slice of life'</span> etc.</p>
-				<hr>
-				</hr>
-				<h4>Don't know where to start?</h4>
-
-				<div class="d-inline-flex">
-					<i class="fa-solid fa-check pt-1 px-2"></i>
-					<a href="listsearch.php" class="text-decoration-underline text-primary">
-						<h5 class="text-muted">Check our 'Anime for Beginners Lists'</h5>
-					</a>
+				<div class="col-md-6 col-sm-3 text-center">
+					<img src="images/logo2.svg" class="img-fluid mx-auto cas-logo pt-5" alt="">
 				</div>
-				<!--SEARCH FORM-->
-				<form class="d-inline-flex pt-2" action="search.php" method="GET">
-					<input class="form-control me-2" type="search" placeholder="Search for anime" aria-label="Search" name="searchterm" required>
-					<button class="btn btn-outline-primary" type="submit" name="search">Search</button>
-				</form>
 			</div>
 		</div>
-
 	</div>
 </body>
+
+<?php
+require_once('footer.php');
+?>
 
 </html>

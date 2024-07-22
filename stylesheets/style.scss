@@ -1,0 +1,109 @@
+$theme-colors: (
+  'primary': #2F4582,
+  'secondary':#ffdbbd,
+	'tertiary': #ef5454,
+  'success': #32987d,
+  'info': #ADCAEB,
+  'warning': #9a031e,
+  'light': #f8f6f3,
+  'dark': #E5AA70,
+  'danger': #f8f6f3,
+);
+
+//import bootstrap and font 
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+
+//basic css for htm body and scroll bar
+html,
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  background-color: #f8f6f3;
+	font-family: 'League Spartan', sans-serif;
+}
+
+.nav-link{
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1.5rem;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #000000;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #2b0806;
+  border-radius: 10px;;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-text{
+  font-size: 5.5rem;
+  line-height: 0.8em;
+
+}
+
+.strokeme{
+  color: #f8f6f3;
+  text-shadow:
+  -1.5px -1.5px 0 #2F4582,
+  1px -1.5px 0 #2F4582,
+  -1.5px 1.5px 0 #2F4582,
+  1.5px 1.5px 0 #2F4582;  
+  -webkit-font-smoothing: antialiased;
+
+}
+
+.cas-logo{
+	width: 22rem;
+}
+
+.lead{
+  font-size: 1.5rem;
+}
+.box{
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px 10px;
+  text-align: center;
+
+  strong{
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .code{
+    border: 0px;
+    text-align: center;
+    border-bottom: 3px solid #999;
+    width: 30px;
+    margin: 0px 10px;
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 5px;
+  }
+}
+
+.activation{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
