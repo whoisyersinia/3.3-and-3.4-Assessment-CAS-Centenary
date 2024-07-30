@@ -31,19 +31,38 @@
 							<a class="nav-link text-primary fw-normal" href="">About</a>
 						</li>
 						<li class="nav-item px-3">
-							<a class="nav-link text-primary fw-normal" href="">Contact Us</a>
-						</li>
-						<li class="nav-item px-3">
 							<a class="nav-link text-primary fw-normal" href="">Store</a>
 						</li>
+						<li class="nav-item px-3">
+							<a class="nav-link text-primary fw-normal" href=""><i class="fa-solid fa-cart-shopping pe-2"></i>Cart</a>
+						</li>
+						<?php
+						if (isset($_SESSION['login'])) {
+							echo "<li class='nav-item px-3 pt-1'>
+							<a class='fw-bold text-primary text-decoration-none' style='font-size: 1.3rem;'><i class='fa-solid fa-user pe-2'></i>$_SESSION[username]</a>
+							</li>";
+						}
+						?>
 					</ul>
 				</div>
-				<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-3'>
+				<?php
+				if (isset($_SESSION['login'])) {
+
+					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-5'>
+					<button type='button' class='nav-item btn btn-tertiary navbar-btn btn-sm text-capitalize text-white me-2'id='btn_logout' style='--bs-btn-padding-y: 0.5rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: 0.8rem; border-color: #000000;'>Logout</button> </div>";
+				} else {
+					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-3'>
 					<button type='button' class='nav-item btn navbar-btn btn-sm text-primary' id='btn_login' style='--bs-btn-padding-y: 0.5rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: 0.8rem;  border-color: #2b0806;'>Sign In</button>
-				</div>
-				<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-5'>
+					</div>";
+
+					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-5'>
 					<button type='button' class='nav-item btn btn-primary navbar-btn btn-sm text-capitalize' id='btn_register' style='--bs-btn-padding-y: 0.5rem; --bs-btn-padding-x: 1.3rem; --bs-btn-font-size: 0.8rem;'>Sign Up</button>
-				</div>
+					</div>";
+				}
+				?>
+
+
+
 			</div>
 		</nav>
 	</body>

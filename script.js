@@ -34,6 +34,17 @@ if (btn_register != null) {
   btn_register = null;
 }
 
+let btn_logout = document.getElementById("btn_logout");
+
+if (btn_logout != null) {
+  btn_logout = document.getElementById("btn_logout");
+  btn_logout.addEventListener("click", function () {
+    document.location.href = "logout.php";
+  });
+} else {
+  btn_logout = null;
+}
+
 setTimeout(function () {
   bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
 }, 3000);
@@ -85,3 +96,17 @@ window.onload = function () {
     display = null;
   }
 };
+
+let sign_up_button = document.getElementById("sign_up");
+
+if (sign_up_button != null) {
+  sign_up_button.addEventListener("mouseover", function () {
+    sign_up_button.classList.add("btn-transparent");
+    sign_up_button.classList.remove("btn-primary");
+  });
+
+  sign_up_button.addEventListener("mouseout", function () {
+    sign_up_button.classList.add("btn-primary");
+    sign_up_button.classList.remove("btn-transparent");
+  });
+}
