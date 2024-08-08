@@ -38,9 +38,15 @@
 						</li>
 						<?php
 						if (isset($_SESSION['login'])) {
-							echo "<li class='nav-item px-3 pt-1'>
-							<a class='fw-bold text-primary text-decoration-none' style='font-size: 1.3rem;'><i class='fa-solid fa-user pe-2'></i>$_SESSION[username]</a>
-							</li>";
+							if ($_SESSION['admin'] == 1) {
+								echo "<li class='nav-item px-3 pt-1'>
+								<a class='fw-bold text-tertiary text-decoration-none' href='admin.php' style='font-size: 1.3rem;'><i class='fa-solid fa-user-tie pe-2'></i>$_SESSION[username]</a>
+								</li>";
+							} else {
+								echo "<li class='nav-item px-3 pt-1'>
+								<a class='fw-bold text-primary text-decoration-none' style='font-size: 1.3rem;'><i class='fa-solid fa-user pe-2'></i>$_SESSION[username]</a>
+								</li>";
+							}
 						}
 						?>
 					</ul>
