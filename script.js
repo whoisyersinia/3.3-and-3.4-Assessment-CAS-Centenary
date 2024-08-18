@@ -114,7 +114,7 @@ if (sign_up_button != null) {
 if (nav != null) {
   window.addEventListener("scroll", function () {
     if (window.scrollY > 100) {
-      nav.classList.add("bg-dark", "shadow");
+      nav.classList.add("bg-primary", "shadow");
     } else {
       nav.classList.remove("bg-dark", "shadow");
     }

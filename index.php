@@ -89,6 +89,94 @@ session_start();
 			</div>
 		</div>
 	</div>
+	<div class="container-fluid overflow-hidden px-4 py-5 bg-dark w-100 shadow-lg">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg hover-zoom card_img">
+					<div class="d-flex flex-column h-100 px-4 pt-5 mt-5 text-white text-shadow-1">
+						<ul class="d-flex list-unstyled mt-auto">
+							<li class="me-auto pt-5 mt-5">
+								<img class="rounded-circle border border-white" src="./images/cat_transparent.svg" width="32" height="32" alt="logo" loading="lazy">
+							</li>
+							<li class="d-flex align-items-center">
+								<a class="text-decoration-none text-white pt-5 mt-5"><small>Anicus 2023</small></a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-md-5 text-end m-0 fade-right reveal_once">
+				<h2 class="fw-bold ">Welcome to the <span class="text-white text_effect">World of Anime.</span></h2>
+				<p>Anime is a type of animation originating from Japan. It has a wide range of genres for all type of viewers, including, but not limted to: <span class="fw-bold">action, drama, romance, comedy, horror, fantasy, sports, sci-fi, 'slice of life'</span> etc.</p>
+				<hr>
+				</hr>
+				<h4>Don't know where to start?</h4>
+
+				<div class="d-inline-flex">
+					<i class="fa-solid fa-check pt-1 px-2"></i>
+					<a href="listsearch.php" class="text-decoration-underline text-primary">
+						<h5 class="text-muted">Check our 'Anime for Beginners Lists'</h5>
+					</a>
+				</div>
+				<!--SEARCH FORM-->
+				<form class="d-inline-flex pt-2" action="search.php" method="GET">
+					<input class="form-control me-2" type="search" placeholder="Search for anime" aria-label="Search" name="searchterm" required>
+					<button class="btn btn-outline-primary" type="submit" name="search">Search</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="overflow-hidden container-fluid my-5">
+		<div class="row">
+			<div class="promo_text text-primary">
+				<h3 class="fw-bold">Create your own list</h3>
+				<p>Tired of keeping track of all the Anime you've watched?</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid px-4 py-5 bg-dark w-100">
+		<div class="row">
+			<div class="col-md-7 px-4">
+				<h2 class="fw-bold">Anime listing made easy <span class="text-muted text_effect">with us.</span></h2>
+				<h4 class="fs-4">Get familiar with our format.</h4>
+				<div class="d-flex justify-content-center align-content-center pt-sm-2 mt-auto">
+					<div class='card border-black border-2 ' style='width: 18rem;'>
+						<img src='./images/bg-4.png' class='card-img-top' alt='card-img'>
+						<div class='card-body mx-1'>
+							<h5 class='card-title text-break fw-bold text-clamp' style='font-size: clamp(1rem, 1.3vw, 1.5rem);'>Best Anime Ever</h5>
+							<h6 class='card-subtitle mb-2 text-wrap text-tertiary text-wrap'>Adventure, Fantasy</h6>
+							<h6 class='card-subtitle mb-2 text-wrap  text-wrap'>This is the best anime ever!!!!</h6>
+							<div class='pt-2 pb-2 d-flex gap-2 justify-content-start align-content-start'>
+								<button type='button' class='btn btn-success btn-sm border-black text-white disabled'> <i class='fa-solid fa-plus pe-2'></i>Add to list
+								</button>
+								<button type='button' class='btn btn-info btn-sm border-black disabled'>Read More</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 pt-3">
+				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg hover-zoom card_img_2">
+					<div class="d-flex flex-column h-100 p-5 pb-3 mt-5 text-white text-shadow-1">
+						<ul class="d-flex list-unstyled mt-auto">
+							<li class="me-auto pt-5 mt-5">
+								<img class="rounded-circle border border-white" src="./images/cat_transparent.svg" width="32" height="32" alt="logo" loading="lazy">
+							</li>
+							<li class="d-flex align-items-center">
+								<a class="text-decoration-none text-white pt-5 mt-5"><small>Anicus 2023</small></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				</p>
+			</div>
+		</div>
+	</div>
 </body>
 
 <?php

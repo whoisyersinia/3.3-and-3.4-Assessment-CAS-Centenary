@@ -5,97 +5,102 @@ require_once('./includes/basehead.html');
 session_start();
 
 // check if user has logged in - if not 403 foribbden error
-// if (!isset($_SESSION['login'])) {
+
+// if (isset($_SESSION['login'])) {
+// 	if ($_SESSION['admin'] == 0) {
+// 		http_response_code(403);
+// 		header("Location: /CAS Centenary/errordocs/403.html");
+// 		die();
+// 	}
+// } else {
 // 	http_response_code(403);
-// 	header("Location: /anicus/errordocs/403.html");
+// 	header("Location: /CAS Centenary/errordocs/403.html");
 // 	die();
 // }
 
 $errors = array();
-$t = $g = $ep = $da = $sy = FALSE;
+// set form variables to False
+$name = $desc = $price = $stock = $picture = FALSE;
 
-// if (isset($_POST['submit'])) {
-// 	ini_set('display_errors', '1');
-// 	ini_set('display_startup_errors', '1');
-// 	error_reporting(E_ALL);
+if (isset($_POST['submit'])) {
+	ini_set('display_errors', '1');
+	ini_set('display_startup_errors', '1');
+	error_reporting(E_ALL);
 
-// 	if (empty($_POST['title'] || $_POST['genre'] = array() || $_POST['ep'])) {
-// 		array_push($errors, "Required fields empty!");
-// 	} else {
+	if (empty($_POST['name'] || $_POST['price'] || $_POST['stock'])) {
+		array_push($errors, "Required fields empty!");
+	} else {
 
-// 		$title = preg_replace('/\s+/', ' ', $_POST['title']);
+		$name = preg_replace('/\s+/', ' ', $_POST['name']);
 
-
-// 		if (strlen($title) > 2) {
-// 			if (strlen($title) < 255) {
-// 				$t = mysqli_real_escape_string($conn, $title);
-// 			} else {
-// 				array_push($errors, "Your title exceeds the chracter limit (255)!");
-// 			}
-// 		} else {
-// 			array_push($errors, "Your title is less than 2 characters long!");
-// 		}
-
-// 		if (isset($_POST['genre'])) {
-// 			$genre = implode(', ', $_POST['genre']);
-// 			$g = mysqli_real_escape_string($conn, $genre);
-// 		} else {
-// 			array_push($errors, "Genre field empty!");
-// 		}
-
-// 		if ($_POST['ep'] <= 0) {
-// 			array_push($errors, "Episodes must not equal or be less than 0!");
-// 		} else {
-// 			$ep = mysqli_real_escape_string($conn, $_POST['ep']);
-// 		}
+		// form validation through required fields
+		if (strlen($name) > 2) {
+			if (strlen($name) < 255) {
+				$t = mysqli_real_escape_string($conn, $name);
+			} else {
+				array_push($errors, "Your product name exceeds the chracter limit (255)!");
+			}
+		} else {
+			array_push($errors, "Your product name is less than 2 characters long!");
+		}
 
 
-// 		if (!empty($_POST['date_aired'])) {
-// 			date_default_timezone_set("Pacific/Auckland");
-// 			$now = time();
-// 			$date_now = date('Y-m-d', $now);
-// 			if ($_POST['date_aired'] > $date_now) {
-// 				array_push($errors, "Airing date must not be in the future.");
-// 			} else {
-// 				$da = mysqli_real_escape_string($conn, $_POST['date_aired']);
-// 			}
-// 		} else {
-// 			$da = NULL;
-// 		}
+		if ($_POST['price'] <= 0) {
+			array_push($errors, "Price must not be less than or equal to 0!");
+		} else {
+			$price = mysqli_real_escape_string($conn, $_POST['price']);
+		}
 
-// 		$synopsis = preg_replace('/\s+/', ' ', $_POST['synopsis']);
-// 	}
-// 	if (!empty($synopsis)) {
-// 		if (strlen($synopsis) > 5000) {
-// 			array_push($errors, "Your synopsis is more than 5000 characters!");
-// 		} else {
-// 			$sy = mysqli_real_escape_string($conn, $synopsis);
-// 		}
-// 	} else {
-// 		$sy = NULL;
-// 	}
-// }
+		if ($_POST['stock'] <= 0) {
+			array_push($errors, "Stock quantity must not be less than or equal to 0!");
+		} else {
+			$stock = mysqli_real_escape_string($conn, $_POST['stock']);
+		}
+
+		$description = preg_replace('/\s+/', ' ', $_POST['desc']);
+		$pic_link = preg_replace('/\s+/', ' ', $_POST['picture']);
+	}
+	// desc not required field
+	if (!empty($description)) {
+		if (strlen($description) > 5000) {
+			array_push($errors, "Your synopsis is more than 5000 characters!");
+		} else {
+			$desc = mysqli_real_escape_string($conn, $description);
+		}
+	} else {
+		$desc = NULL;
+	}
+	if (!empty($pic_link)) {
+		if (strlen($pic_link) > 255) {
+			array_push($errors, "Your picture link is more than 255 characters!");
+		} else {
+			$picture = mysqli_real_escape_string($conn, $pic_link);
+		}
+	} else {
+		$picture = NULL;
+	}
+}
 
 
-// if ($t && $g && $ep && ($da !== False) && ($sy !== False)) {
+if ($name && $price && $stock && ($desc !== False) && ($picture !== False)) {
 
-// 	$check_title_exists = "SELECT `title` FROM `anime` WHERE `title`='" . $t . "'";
-// 	$r = mysqli_query($conn, $check_title_exists) or trigger_error("Query: $q\n<br>MySQL Error: " . mysqli_error($conn));
+	$check_name_exists = "SELECT `name` FROM `product` WHERE `name`='" . $name . "'";
+	$r = mysqli_query($conn, $check_name_exists) or trigger_error("Query: $q\n<br>MySQL Error: " . mysqli_error($conn));
 
-// 	if (mysqli_num_rows($r) == 0) {
-// 		$userid = $_SESSION['iduser'];
-// 		$now = time();
-// 		$date_now = date('Y-m-d', $now);
+	if (mysqli_num_rows($r) == 0) {
+		date_default_timezone_set("Pacific/Auckland");
+		$now = time();
+		$datetime = date("Y-m-d H:i:s", $now);
 
-// 		$query = "INSERT into `anime` (`title`, `synopsis`, `genre`, `date_aired`, `episodes`, `updated_on`, `iduser`) VALUES ('$t', " . ($sy == NULL ? "NULL" : "'$sy'") . ", '$g', " . ($da == NULL ? "NULL" : "'$da'") . ", '$ep', '$date_now','$userid')";
+		$query = "INSERT into `product` (`image`, `name`, `desc`, `price`, `stock`, `created_at`) VALUES ('$picture', '$name', " . ($desc == NULL ? "NULL" : "'$desc'") . ", '$price', '$stock', '$datetime')";
 
-// 		$result = mysqli_query($conn, $query);
-// 		header("Location: anime.php?s=add");
-// 		mysqli_close($conn);
-// 	} else {
-// 		array_push($errors, "Anime already exists. (Same Title Found!)");
-// 	}
-// }
+		$result = mysqli_query($conn, $query);
+		header("Location: stock.php?s=add");
+		mysqli_close($conn);
+	} else {
+		array_push($errors, "Product already exists. (Product Name Found!)");
+	}
+}
 
 
 //print errors
@@ -138,15 +143,42 @@ if ($errors) {
 				</div>
 				<div class="col-md-10">
 					<div class="form-floating">
-						<textarea name="synopsis" type="text" class="form-control border border-3 border-info" id="floatingSynopsis" cols="30" rows="5"><?php if (isset($_POST['synopsis'])) echo $_POST['synopsis']; ?></textarea>
-						<label for="floatingSynopsis">Description</label>
-						<div id="synopsisHelp" class="form-text text-info">Include the general description of the product. (Max: 5000 characters)</div>
+						<textarea name="desc" type="text" class="form-control border border-3 border-info" id="floatingSynopsis" cols="30" rows="5"><?php if (isset($_POST['desc'])) echo $_POST['desc']; ?></textarea>
+						<label for="floatingDesc">Description</label>
+						<div id="descHelp" class="form-text text-info">Include the general description of the product. (Max: 5000 characters)</div>
 					</div>
 				</div>
 			</div>
+			<div class="justify-content-center d-flex gap-5">
+				<div class="col-md-2">
+					<div class="form-floating">
+						<input name="price" type="number" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (isset($_POST['price'])) echo $_POST['price']; ?>" max=9999 step=0.1>
+						<label for="floatingPrice">Price (NZ$)<span class="text-warning fw-bold">*</span></label>
+						<div id="priceHelp" class="form-text text-info">Set Price.</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating">
+						<input name="stock" type="number" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (isset($_POST['stock'])) echo $_POST['stock']; ?>" max=99999 step=1>
+						<label for="floatingStock">Stock<span class="text-warning fw-bold">*</span></label>
+						<div id="stockHelp" class="form-text text-info">Set Stock (quantity).</div>
+					</div>
+				</div>
+			</div>
+			<div class=" justify-content-center d-flex">
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input name="picture" type="text" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (isset($_POST['picture'])) echo $_POST['picture']; ?>">
+						<label for="floatingPicture">Insert Picture Link</label>
+						<div id="picHelp" class="form-text text-info">Put image into product_images folder.</div>
+					</div>
+				</div>
+			</div>
+			<div class="mt-4 d-inline-flex gap-3">
 
-			<div class="mt-4">
-				<button class="btn btn-lg btn-primary w-100" type="submit" name="submit">Add Product to Inventory</button>
+				<button class="btn btn-lg btn-tertiary text-white border-primary w-100" type="button" onclick="window.location.href='stock.php'">Cancel</button>
+
+				<button class="btn btn-lg btn-primary w-100" type="submit" name="confirm">Confirm</button>
 			</div>
 			<p class="mt-5 mb-3 text-muted text-center text-light">&copy; Christchurch Adventist School 2024-2025</p>
 		</form>

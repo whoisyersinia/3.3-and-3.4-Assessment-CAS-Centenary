@@ -53,7 +53,7 @@ if ($hour >= 6 && $hour < 12) {
 							$url = "stock.php";
 							$onclick = $windowloc . "\"$url\"";
 
-							echo "<button type='button' class='btn btn-primary btn-rounded btn-lg' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up' onclick='$onclick'>View Stock</button>";
+							echo "<button type='button' class='btn btn-primary btn-rounded btn-lg' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up' onclick='$onclick'>View Inventory</button>";
 
 							echo "<button type='button' class='btn btn-outline-primary btn-rounded btn-lg px-5' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up'>View Event</button>"
 							?>
