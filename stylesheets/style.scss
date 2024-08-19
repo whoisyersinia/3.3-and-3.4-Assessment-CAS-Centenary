@@ -1,9 +1,9 @@
 $theme-colors: (
   'primary': #2F4582,
-  'secondary':#ffdbbd,
-	'tertiary': #ef5454,
+  'secondary':#e3e1e1,
+  'tertiary': #ef5454,
   'success': #32987d,
-  'info': #ADCAEB,
+  'info': #5298e8,
   'warning': #9a031e,
   'light': #f8f6f3,
   'dark': #E5AA70,
@@ -14,6 +14,7 @@ $theme-colors: (
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Raleway:wght@900&display=swap');
 
 //basic css for htm body and scroll bar
 html,
@@ -39,7 +40,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #2b0806;
+  background-color: #2F4582;
   border-radius: 10px;;
 }
 
@@ -106,4 +107,77 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+} 
+
+.card{
+  font-family: "Inconsolata", monospace;
+  font-weight: 200;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  cursor: pointer;
+}
+
+.card-link{
+  text-decoration: none;
+}
+
+.product-card{
+  font-family: "Inconsolata", monospace;
+}
+
+.product_name{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.product_price{
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.free_shipping{
+  font-weight: 400;
+}
+
+.product_desc{
+  font-size: 0.8rem;
+  font-family: "Incnsolata", monospace;
+  font-weight: 500;
+}
+
+span {cursor:pointer; }
+.minus, .plus{
+  width:18px;
+  height:20px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+.number input{
+  font-family: "Inconsolata", monospace;
+  height: 34px;
+  width: 35px;
+  text-align: center;
+  font-size: 18px;
+  background: #e3e1e1 ;
+  border: 1px solid #e3e1e1;
+  border-radius:1px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.quantity_helper{
+  font-size: 0.8rem;
+  font-weight: 200;
+}
+
+.copyright{
+  font-size: 0.8rem;
+  font-weight: 500;
 }

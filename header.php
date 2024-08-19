@@ -31,7 +31,7 @@
 							<a class="nav-link text-primary fw-normal" href="">About</a>
 						</li>
 						<li class="nav-item px-3">
-							<a class="nav-link text-primary fw-normal" href="">Store</a>
+							<a class="nav-link text-primary fw-normal" href="store.php">Store</a>
 						</li>
 						<li class="nav-item px-3">
 							<a class="nav-link text-primary fw-normal" href=""><i class="fa-solid fa-cart-shopping pe-2"></i>Cart</a>

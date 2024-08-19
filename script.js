@@ -122,3 +122,41 @@ if (nav != null) {
 } else {
   nav = null;
 }
+
+$(document).ready(function () {
+  $(".minus").click(function () {
+    var $input = $(this).parent().find("input");
+    var count = parseInt($input.val()) - 1;
+    count = count < 1 ? 1 : count;
+    $input.val(count);
+    $input.change();
+    return false;
+  });
+  $(".plus").click(function () {
+    var $input = $(this).parent().find("input");
+    $input.val(parseInt($input.val()) + 1);
+    $input.change();
+    return false;
+  });
+});
+
+// trigger when form is submitted
+// runs the form without it reloading using ajax, when success shows modal
+$(document).ready(function () {
+  $("#shop_form").on("submit", function (e) {
+    let qty = document.getElementById("qty").value;
+    e.preventDefault();
+    $.ajax({
+      type: $(this).attr("method"),
+      url: $(this).attr("action") + "&qty=" + qty,
+      data: $(this).serialize(),
+      success: function () {
+        $("#cartModal").modal("show");
+        console.log("success");
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+  });
+});
