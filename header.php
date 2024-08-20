@@ -6,6 +6,9 @@
 
 		session_start();
 
+		ini_set('display_errors', '1');
+		ini_set('display_startup_errors', '1');
+		error_reporting(E_ALL);
 		?>
 		<nav class="navbar fixed-top navbar-expand-lg navbar-dark z-1 bg-danger">
 
@@ -33,8 +36,19 @@
 						<li class="nav-item px-3">
 							<a class="nav-link text-primary fw-normal" href="store.php">Store</a>
 						</li>
+						<?php
+						$query = "SELECT * FROM `cart_item` WHERE (`cart_id` = '" . $_SESSION['cart']['id'] . "')";
+						$r =  mysqli_query($conn, $query);
+						$total_qty = 0;
+						while ($row = mysqli_fetch_array($r)) {
+							$qty = $row['quantity'];
+							$total_qty += $qty;
+						}
+						?>
 						<li class="nav-item px-3">
-							<a class="nav-link text-primary fw-normal" href=""><i class="fa-solid fa-cart-shopping pe-2"></i>Cart</a>
+							<a class="nav-link text-primary fw-normal" href=""><i class="fa-solid fa-cart-shopping pe-2"></i>
+								<span id="cart_total"><?php echo $total_qty ?></span>
+							</a>
 						</li>
 						<?php
 						if (isset($_SESSION['login'])) {

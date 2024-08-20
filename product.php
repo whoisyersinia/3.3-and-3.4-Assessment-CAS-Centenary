@@ -2,8 +2,6 @@
 require_once('./includes/basehead.html');
 require_once('header.php');
 
-session_start();
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
@@ -31,38 +29,6 @@ if (isset($_GET['id'])) {
 		$des = $row['desc'];
 	}
 }
-
-// add to cart
-// if (isset($_POST['add_to_cart'])) {
-// 	// check if user has a cart
-// 	// check if user is logged in
-// 	if (!isset($_SESSION['login'])) {
-// 		header("Location: login.php?s=req");
-// 	} else {
-// 		$user_id = $_SESSION['id'];
-// 	}
-// 	$query = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id')";
-// 	$result =  mysqli_query($conn, $query);
-
-// 	date_default_timezone_set("Pacific/Auckland");
-// 	$now = time();
-// 	$datetime = date("Y-m-d H:i:s", $now);
-// 	if (mysqli_num_rows($r) == 0) {
-// 		// create cart
-// 		$q = "INSERT INTO `cart` (`user_id`, `created_at`, `modified_at`) VALUES ('$user_id', '$datetime', '$datetime')";
-// 		var_dump($q);
-// 		$r =  mysqli_query($conn, $q);
-// 	}
-// 	// select user cart
-// 	$_SESSION['cart'] = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-// 	// add to cart
-// 	$quantity = $_POST['quantity'];
-// 	$q = "INSERT INTO `cart_item` (`cart_id`, `product_id`, `quantity`, `created_at`, `modified_at`) VALUES ('" . $_SESSION['cart']['id'] . "', '$id', '$quantity', '$datetime', '$datetime')";
-// 	$r =  mysqli_query($conn, $q);
-// 	mysqli_close($conn);
-// }
-
 ?>
 
 <title>CAS 100 - <?php echo $na ?></title>
@@ -73,11 +39,6 @@ if (isset($_GET['id'])) {
 		<div class="row container-fluid mt-5 pt-5 align-self-md-stretch mx-auto px-5">
 			<div class="col-md-4">
 				<img src="./product_images/<?php echo $pic ?>" alt="" class="img-fluid">
-				<?php
-				ini_set('display_errors', '1');
-				ini_set('display_startup_errors', '1');
-				error_reporting(E_ALL);
-				?>
 			</div>
 			<div class="col-md-1">
 			</div>

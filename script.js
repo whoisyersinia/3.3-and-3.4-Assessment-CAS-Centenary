@@ -141,16 +141,22 @@ $(document).ready(function () {
 });
 
 // trigger when form is submitted
-// runs the form without it reloading using ajax, when success shows modal
+// runs the form without it reloading using ajax, when success shows modal if not prints console.log error (for development)
 $(document).ready(function () {
   $("#shop_form").on("submit", function (e) {
     let qty = document.getElementById("qty").value;
+    let cart_total_qty = document.getElementById("cart_total");
     e.preventDefault();
     $.ajax({
       type: $(this).attr("method"),
       url: $(this).attr("action") + "&qty=" + qty,
       data: $(this).serialize(),
       success: function () {
+        let currentTotal = parseInt(cart_total_qty.textContent);
+        let currentQty = parseInt(qty);
+
+        cart_total_qty.textContent = currentTotal + currentQty;
+        console.log(cart_total_qty.innerHTML);
         $("#cartModal").modal("show");
         console.log("success");
       },

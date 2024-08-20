@@ -2,10 +2,6 @@
 require_once('./includes/basehead.html');
 require_once('./includes/connectlocal.inc');
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 if (isset($_GET['id'])) {
 	//check if anime exists 
 	$id = $_GET['id'];
@@ -61,9 +57,19 @@ $_SESSION['cart'] = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
 
 // check if item already in cart
-
-// add to cart
-$quantity = $_POST['quantity'];
-$q = "INSERT INTO `cart_item` (`cart_id`, `product_id`, `quantity`, `created_at`, `modified_at`) VALUES ('" . $_SESSION['cart']['id'] . "', '$id', '$quantity', '$datetime', '$datetime')";
+$q = "SELECT * FROM `cart_item` WHERE (`cart_id` = '" . $_SESSION['cart']['id'] . "' AND `product_id` = '$id')";
 $r =  mysqli_query($conn, $q);
+if (mysqli_num_rows($r) > 0) {
+	// update quantity
+	$row = mysqli_fetch_assoc($r);
+	$quantity = $row['quantity'] + $quantity;
+	$q = "UPDATE `cart_item` SET `quantity` = '$quantity', `modified_at` = '$datetime' WHERE (`cart_id` = '" . $_SESSION['cart']['id'] . "' AND `product_id` = '$id')";
+	$r =  mysqli_query($conn, $q);
+} else {
+	// add to cart
+	$quantity = $_POST['quantity'];
+	$q = "INSERT INTO `cart_item` (`cart_id`, `product_id`, `quantity`, `created_at`, `modified_at`) VALUES ('" . $_SESSION['cart']['id'] . "', '$id', '$quantity', '$datetime', '$datetime')";
+	$r =  mysqli_query($conn, $q);
+}
+
 mysqli_close($conn);
