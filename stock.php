@@ -91,7 +91,7 @@ while ($row = mysqli_fetch_assoc($r)) {
 		<a class='d-flex justify-content-end align-content-end px-1' style='font-size:0.8rem' href='editproduct.php?id=$id'>Edit</a>
 		</div> 
 		</th> 
-		<th><a class='text-tertiary'>$$price<a></th>
+		<th>$$price.00</th>
 		<th>$stock</th>
 
 

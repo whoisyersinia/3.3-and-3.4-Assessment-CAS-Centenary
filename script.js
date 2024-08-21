@@ -165,4 +165,19 @@ $(document).ready(function () {
       },
     });
   });
+
+  if (window.location.pathname.endsWith("cart.php")) {
+    $("input[name='quantity']").change(function () {
+      var newQuantity = $(this).val();
+      var productId = $(this).data("product-id");
+      $.ajax({
+        url: "updatecart.php",
+        type: "post",
+        data: { quantity: newQuantity, product_id: productId },
+        success: function (response) {
+          location.reload(); // Reload the page to get the updated cart
+        },
+      });
+    });
+  }
 });

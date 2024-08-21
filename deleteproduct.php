@@ -20,7 +20,7 @@ require_once("./includes/connectlocal.inc");
 $errors = array();
 
 if (isset($_GET['id'])) {
-	//check if anime exists 
+	//check if product exists 
 	$id = $_GET['id'];
 
 	$q = "SELECT * FROM `product` WHERE (`id` = '$id')";

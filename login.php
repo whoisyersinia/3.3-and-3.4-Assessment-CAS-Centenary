@@ -4,6 +4,7 @@ require_once('./includes/basehead.html');
 session_start();
 
 
+
 // if user is redirected to login page
 if (!empty($_GET['s'])) {
 	echo "<div class='alert alert-danger alert-dismissable d-flex align-items-center fade show fixed-top' role='alert'>";
@@ -15,7 +16,7 @@ if (!empty($_GET['s'])) {
 
 	echo "<button type='button' class='btn-close position-absolute top-25 end-0 me-3' data-bs-dismiss='alert' aria-label='Close'></button>     
 		</div>";
-	header("refresh:3;url=login.php");
+	header("refresh:;url=login.php");
 }
 
 if (isset($_POST['login'])) {
@@ -58,15 +59,20 @@ if (isset($_POST['login'])) {
 			$_SESSION = mysqli_fetch_array($r, MYSQLI_ASSOC);
 			$_SESSION['login'] = true;
 
-			// add cart to session
-			// $user_id = $_SESSION['id'];
-			// $q = "SELECT * FROM `cart` WHERE (`id` = '$user_id')";
-			// $r =  mysqli_query($conn, $q);
-			// if (mysqli_num_rows($r) == 1) {
-			// 	$_SESSION['cart'] = mysqli_fetch_array($r, MYSQLI_ASSOC);
-			// }
+			//add cart to session
+			$user_id = $_SESSION['id'];
+			date_default_timezone_set("Pacific/Auckland");
+			$now = time();
+			$datetime = date("Y-m-d H:i:s", $now);
 
+			$q = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id')";
+			$result =  mysqli_query($conn, $q);
+			if (mysqli_num_rows($result) == 0) {
+				$q = "INSERT INTO `cart` (`user_id`, `created_at`, `modified_at`) VALUES ('$user_id', '$datetime', '$datetime')";
+				$result =  mysqli_query($conn, $q);
+			}
 
+			$_SESSION['cart'] = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			mysqli_free_result($r);
 			mysqli_close($conn);
 

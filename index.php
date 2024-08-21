@@ -26,6 +26,8 @@ session_start();
 
 		echo "<button type='button' class='btn-close position-absolute top-25 end-0 me-3' data-bs-dismiss='alert' aria-label='Close'></button>     
 		</div>";
+		header("refresh:3;url=index.php");
+
 
 		// ensure that welcome message only prints once after login
 		$_SESSION['welcome_message'] = True;

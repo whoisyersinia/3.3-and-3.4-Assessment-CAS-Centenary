@@ -7,7 +7,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 if (isset($_GET['id'])) {
-	//check if anime exists 
+	//check if product exists 
 	$id = $_GET['id'];
 
 	$q = "SELECT * FROM `product` WHERE (`id` = '$id')";
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 
 	if (mysqli_num_rows($r) == 0) {
 		http_response_code(404);
-		header("Location: /errordocs/404.html");
+		header("Location: /CAS Centenary/errordocs/404.html");
 		die();
 	}
 
@@ -53,7 +53,12 @@ if (isset($_GET['id'])) {
 					<span class="plus">+</span>
 				</div>
 				<div class="pt-5">
-					<button type="submit" class="w-100 btn-lg btn btn-primary" name="add_to_cart">Add to Cart</button>
+					<?php if (isset($_SESSION['login'])) { ?>
+						<button type="submit" class="w-100 btn-lg btn btn-primary" name="add_to_cart">Add to Cart</button>
+
+					<?php } else { ?>
+						<button type="button" class="w-100 btn-lg btn btn-primary" onclick="window.location.href='login.php?s=req'">Login to Add Item to Cart</button>
+					<?php } ?>
 				</div>
 				<div class="pt-2">
 					<hr>
@@ -94,7 +99,7 @@ if (isset($_GET['id'])) {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
-					<button type="button" class="btn btn-primary">Go to Cart</button>
+					<button type="button" class="btn btn-primary" onclick="window.location.href='cart.php?id=<?php if (isset($_SESSION['login'])) echo $_SESSION['id'] ?>'">Go to Cart</button>
 				</div>
 			</div>
 		</div>

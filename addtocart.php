@@ -1,9 +1,13 @@
 <?php
 require_once('./includes/basehead.html');
 require_once('./includes/connectlocal.inc');
+session_start();
+ob_start();
+
+$user_id = $_SESSION['id'];
 
 if (isset($_GET['id'])) {
-	//check if anime exists 
+	//check if item exists 
 	$id = $_GET['id'];
 
 	$q = "SELECT * FROM `product` WHERE (`id` = '$id')";
@@ -12,7 +16,7 @@ if (isset($_GET['id'])) {
 
 	if (mysqli_num_rows($r) == 0) {
 		http_response_code(404);
-		header("Location: /errordocs/404.html");
+		header("Location: /CAS Centenary/errordocs/404.html");
 		die();
 	}
 
@@ -32,14 +36,8 @@ if (isset($_GET['qty'])) {
 }
 
 
-session_start();
 // check if user has a cart
-// check if user is logged in
-if (!isset($_SESSION['login'])) {
-	header("Location: login.php?s=req");
-} else {
-	$user_id = $_SESSION['id'];
-}
+
 $query = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id')";
 $result =  mysqli_query($conn, $query);
 
@@ -72,4 +70,26 @@ if (mysqli_num_rows($r) > 0) {
 	$r =  mysqli_query($conn, $q);
 }
 
+$cart_id = $_SESSION['cart']['id'];
+
+// update cart total price
+$q = "SELECT * FROM `product` 
+		LEFT JOIN `cart_item` ON product.id = cart_item.product_id 
+		LEFT JOIN `cart` ON cart.id = cart_item.cart_id
+		WHERE cart_item.cart_id = '$cart_id'
+		ORDER BY `cart_item`.`modified_at` DESC";
+$r = mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
+
+$total_price = 0;
+
+while ($row = mysqli_fetch_array($r)) {
+	$total_product_price = 0;
+	$price = $row['price'];
+	$qty = $row['quantity'];
+
+	$total_product_price += $price * $qty;
+	$total_price += $total_product_price;
+}
+$q = "UPDATE `cart` SET `total_price` = '$total_price', `modified_at` = '$datetime' WHERE (`id` = '$cart_id')";
+$r =  mysqli_query($conn, $q);
 mysqli_close($conn);
