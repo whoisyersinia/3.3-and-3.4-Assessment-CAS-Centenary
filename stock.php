@@ -3,20 +3,19 @@ require_once('./includes/basehead.html');
 require_once("./includes/connectlocal.inc");
 require_once('header.php');
 
-
 // check if user has admin perms in - if not 403 foribbden error
 
-// if (isset($_SESSION['login'])) {
-// 	if ($_SESSION['admin'] == 0) {
-// 		http_response_code(403);
-// 		header("Location: /CAS Centenary/errordocs/403.html");
-// 		die();
-// 	}
-// } else {
-// 	http_response_code(403);
-// 	header("Location: /CAS Centenary/errordocs/403.html");
-// 	die();
-// }
+if (isset($_SESSION['login'])) {
+	if ($_SESSION['admin'] == 0) {
+		http_response_code(403);
+		header("Location: /CAS Centenary/errordocs/403.html");
+		die();
+	}
+} else {
+	http_response_code(403);
+	header("Location: /CAS Centenary/errordocs/403.html");
+	die();
+}
 
 // status popup messages
 if (!empty($_GET['s'])) {
@@ -60,8 +59,21 @@ if (!empty($_GET['s'])) {
 	}
 }
 
+if (isset($_GET['searchterm'])) {
+	$query = $_GET['searchterm'];
+	$query = mysqli_escape_string($conn, $query);
+	$q = "SELECT * FROM `product` WHERE `name` LIKE '%$query%' ORDER BY `product`.`updated_at` DESC";
+	if (empty($query)) {
+		$search = False;
+	} else {
+		$search = True;
+	}
+} else {
+	$search = False;
+	$q = "SELECT * FROM `product` ORDER BY `product`.`updated_at` DESC";
+}
+
 //show inventory table 
-$q = "SELECT * FROM `product` ORDER BY `product`.`price` DESC";
 $r = mysqli_query($conn, $q);
 
 $result = False;
@@ -107,7 +119,7 @@ while ($row = mysqli_fetch_assoc($r)) {
 <body class="mt-5 pt-5 px-0 container-fluid">
 	<h1 class="fw-bold text-primary d-flex justify-content-center">Inventory</h1>
 	<div class="d-flex justify-content-center align-content-center mx-auto">
-		<form action="search.php" method="GET">
+		<form method="GET">
 			<div class=" d-inline-flex gap-2 container-fluid">
 				<i class="fa-solid text-primary fa-magnifying-glass justify-content-center align-self-center fa-xl"></i>
 				<input class="form-control me-2" type="search" placeholder="Search for product" aria-label="Search" name="searchterm" value="<?php if (isset($_GET['searchterm'])) echo $_GET['searchterm']; ?>">

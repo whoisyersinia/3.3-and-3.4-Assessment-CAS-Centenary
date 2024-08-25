@@ -5,17 +5,17 @@ require_once("./includes/connectlocal.inc");
 
 // check if user has logged in - if not 403 foribbden error
 
-// if (isset($_SESSION['login'])) {
-// 	if ($_SESSION['admin'] == 0) {
-// 		http_response_code(403);
-// 		header("Location: /CAS Centenary/errordocs/403.html");
-// 		die();
-// 	}
-// } else {
-// 	http_response_code(403);
-// 	header("Location: /CAS Centenary/errordocs/403.html");
-// 	die();
-// }
+if (isset($_SESSION['login'])) {
+	if ($_SESSION['admin'] == 0) {
+		http_response_code(403);
+		header("Location: /CAS Centenary/errordocs/403.html");
+		die();
+	}
+} else {
+	http_response_code(403);
+	header("Location: /CAS Centenary/errordocs/403.html");
+	die();
+}
 
 $errors = array();
 

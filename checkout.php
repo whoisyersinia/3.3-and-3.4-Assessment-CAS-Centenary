@@ -2,6 +2,10 @@
 require_once('./includes/basehead.html');
 require_once('header.php');
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 if (!isset($_SESSION['login'])) {
 	header("Location: login.php?s=req");
 } else {
@@ -97,7 +101,7 @@ if ($fn && $ln) {
 	$r = mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
 
 	// insert into orders
-	$q = "INSERT into `order` (`user_id`, `cart_id`, `total`, `created_at`, `modified_at`, `paid`) VALUES ('$id', '$cart_id', '$total_price', '$datetime', '$datetime', 0)";
+	$q = "INSERT into `order` (`user_id`, `cart_id`, `total`, `created_at`, `modified_at`) VALUES ('$id', '$cart_id', '$total_price', '$datetime', '$datetime')";
 	$r = mysqli_query($conn, $q) or trigger_error("Qsuery: $q\b<br/>MySQL Error: " . mysqli_error($conn));
 
 	// update qty in products
