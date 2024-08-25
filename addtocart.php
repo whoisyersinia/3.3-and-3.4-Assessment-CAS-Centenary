@@ -6,9 +6,11 @@ ob_start();
 
 $user_id = $_SESSION['id'];
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id'], $_GET['qty'])) {
 	//check if item exists 
 	$id = $_GET['id'];
+	$quantity = $_GET['qty'];
+
 
 	$q = "SELECT * FROM `product` WHERE (`id` = '$id')";
 	$r =  mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
@@ -27,13 +29,14 @@ if (isset($_GET['id'])) {
 		$st = $row['stock'];
 		$pic = $row['image'];
 		$des = $row['desc'];
+		$lim = $row['limit_per_customer'];
 	}
+} else {
+	http_response_code(404);
+	header("Location: /CAS Centenary/errordocs/404.html");
+	die();
 }
 
-if (isset($_GET['qty'])) {
-	//get quantity
-	$quantity = $_GET['qty'];
-}
 
 date_default_timezone_set("Pacific/Auckland");
 $now = time();

@@ -40,16 +40,17 @@ if (isset($_GET['id'])) {
 		$st = $row['stock'];
 		$pic = $row['image'];
 		$des = $row['desc'];
+		$lim = $row['limit_per_customer'];
 	}
 
-	$name = $desc = $price = $stock = $picture = FALSE;
+	$name = $desc = $price = $stock = $picture = $limit =  FALSE;
 
 	if (isset($_POST['submit'])) {
 		$errors = array();
 
 		if (empty($_POST['name'] || $_POST['price'] || $_POST['stock'])) {
 			array_push($errors, "Required fields empty!");
-		} elseif ($_POST['name'] == $na && $_POST['price'] == $pr && $_POST['stock'] == $st && $_POST['picture'] == $pic && $_POST['desc'] == $des) {
+		} elseif ($_POST['name'] == $na && $_POST['price'] == $pr && $_POST['stock'] == $st && $_POST['picture'] == $pic && $_POST['desc'] == $des && $_POST['limit'] == $lim) {
 			array_push($errors, "Please edit to continue!");
 		} else {
 
@@ -102,6 +103,18 @@ if (isset($_GET['id'])) {
 		} else {
 			$picture = NULL;
 		}
+
+		if (!empty($_POST['limit'])) {
+			if ($_POST['limit'] <= 0) {
+				array_push($errors, "Limit quantity must not be less than or equal to 0!");
+			} elseif ($_POST['limit'] > $stock) {
+				array_push($errors, "Limit quantity must not be more than stock quantity!");
+			} else {
+				$limit = mysqli_real_escape_string($conn, $_POST['limit']);
+			}
+		} else {
+			$limit = NULL;
+		}
 	}
 } else {
 	ob_end_clean();
@@ -109,7 +122,7 @@ if (isset($_GET['id'])) {
 	exit();
 }
 
-if ($name && $price && $stock && ($desc !== False) && ($picture !== False)) {
+if ($name && $price && $stock && ($desc !== False) && ($picture !== False) && ($limit !== False)) {
 
 	$check_name_exists = "SELECT `name` FROM `product` WHERE `id` != '$id' AND `name`='" . $name . "'";
 	$r = mysqli_query($conn, $check_name_exists) or trigger_error("Query: $q\n<br>MySQL Error: " . mysqli_error($conn));
@@ -119,7 +132,11 @@ if ($name && $price && $stock && ($desc !== False) && ($picture !== False)) {
 		$now = time();
 		$datetime = date("Y-m-d H:i:s", $now);
 
-		$query = "UPDATE `product` SET `image` = '$picture', `name` = '$name', `desc` = " . ($desc == NULL ? "NULL" : "'$desc'") . ", `price` = '$price', `stock` = '$stock', `updated_at` = '$datetime' WHERE (`id` = '$id')";
+		if ($limit == NULL) {
+			$limit = 0;
+		}
+
+		$query = "UPDATE `product` SET `image` = '$picture', `name` = '$name', `desc` = " . ($desc == NULL ? "NULL" : "'$desc'") . ", `price` = '$price', `stock` = '$stock', `limit_per_customer` = '$limit', `updated_at` = '$datetime' WHERE (`id` = '$id')";
 
 		$result = mysqli_query($conn, $query);
 		header("Location: stock.php?s=update");
@@ -206,7 +223,18 @@ if ($errors) {
 					</div>
 				</div>
 			</div>
-			<div class=" justify-content-center d-flex">
+			<div class=" justify-content-center d-flex gap-2 pt-3">
+				<div class="col-md-2">
+					<div class="form-floating">
+						<input name="limit" type="number" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (!isset($_POST['limit'])) {
+																																																																					echo $lim;
+																																																																				} else {
+																																																																					echo $_POST['limit'];
+																																																																				} ?>" max=99999 step=1>
+						<label for=" floatingLimit">Limit per customer</label>
+						<div id="limitHelp" class="form-text text-info">Set Limit Per Customer</div>
+					</div>
+				</div>
 				<div class="col-md-6">
 					<div class="form-floating">
 						<input name="picture" type="text" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (!isset($_POST['picture'])) {

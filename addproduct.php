@@ -24,7 +24,7 @@ error_reporting(E_ALL);
 
 $errors = array();
 // set form variables to False
-$name = $desc = $price = $stock = $picture = FALSE;
+$name = $desc = $price = $stock = $picture = $limit = FALSE;
 
 if (isset($_POST['submit'])) {
 	ini_set('display_errors', '1');
@@ -83,10 +83,22 @@ if (isset($_POST['submit'])) {
 	} else {
 		$picture = NULL;
 	}
+
+	if (!empty($_POST['limit'])) {
+		if ($_POST['limit'] <= 0) {
+			array_push($errors, "Limit quantity must not be less than or equal to 0!");
+		} elseif ($_POST['limit'] > $stock) {
+			array_push($errors, "Limit quantity must not be more than stock quantity!");
+		} else {
+			$limit = mysqli_real_escape_string($conn, $_POST['limit']);
+		}
+	} else {
+		$limit = NULL;
+	}
 }
 
 
-if ($name && $price && $stock && ($desc !== False) && ($picture !== False)) {
+if ($name && $price && $stock && ($desc !== False) && ($picture !== False) && ($limit !== False)) {
 
 	$check_name_exists = "SELECT `name` FROM `product` WHERE `name`='" . $name . "'";
 	$r = mysqli_query($conn, $check_name_exists) or trigger_error("Query: $q\n<br>MySQL Error: " . mysqli_error($conn));
@@ -96,7 +108,7 @@ if ($name && $price && $stock && ($desc !== False) && ($picture !== False)) {
 		$now = time();
 		$datetime = date("Y-m-d H:i:s", $now);
 
-		$query = "INSERT into `product` (`image`, `name`, `desc`, `price`, `stock`, `created_at`) VALUES ('$picture', '$name', " . ($desc == NULL ? "NULL" : "'$desc'") . ", '$price', '$stock', '$datetime')";
+		$query = "INSERT into `product` (`image`, `name`, `desc`, `price`, `stock`, `limit_per_customer`, `created_at`) VALUES ('$picture', '$name', " . ($desc == NULL ? "NULL" : "'$desc'") . ", '$price', '$stock', '$limit','$datetime')";
 
 		$result = mysqli_query($conn, $query);
 		header("Location: stock.php?s=add");
@@ -169,7 +181,14 @@ if ($errors) {
 					</div>
 				</div>
 			</div>
-			<div class=" justify-content-center d-flex">
+			<div class="justify-content-center d-flex gap-3">
+				<div class="col-md-2">
+					<div class="form-floating">
+						<input name="limit" type="number" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (isset($_POST['limit'])) echo $_POST['limit']; ?>" max=99999 step=1>
+						<label for="floatingLimit">Limit per customer</label>
+						<div id="limitHelp" class="form-text text-info">Set Limit Per Customer(quantity).</div>
+					</div>
+				</div>
 				<div class="col-md-6">
 					<div class="form-floating">
 						<input name="picture" type="text" class="form-control border border-3 border-info" id="floatingGenre" placeholder="" value="<?php if (isset($_POST['picture'])) echo $_POST['picture']; ?>">

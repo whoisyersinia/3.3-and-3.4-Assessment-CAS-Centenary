@@ -27,8 +27,34 @@ if (isset($_GET['id'])) {
 		$st = $row['stock'];
 		$pic = $row['image'];
 		$des = $row['desc'];
+		$lim = $row['limit_per_customer'];
+	}
+
+	if ($st == 0) {
+		$msg = "<p class='text-warning'><i class='fa-solid fa-x'></i> Sorry, this item is out of stock!</p>";
+	} elseif ($st <= 10) {
+		$msg = "<p class='text-warning'><i class='fa-solid fa-stopwatch'></i> Hurry, Only <span class='fw-bold'>$st</span> left in stock!</p>";
+	} else {
+		$msg = NULL;;
+	}
+
+	$cart_id = $_SESSION['cart']['id'];
+
+	$q = "SELECT cart_item.quantity FROM `product` 
+		LEFT JOIN `cart_item` ON product.id = cart_item.product_id 
+		LEFT JOIN `cart` ON cart.id = cart_item.cart_id
+		WHERE cart_item.cart_id = '$cart_id' AND product.id = '$id'";
+	$r = mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
+
+	if (mysqli_num_rows($r) == 0) {
+		$curr_qty = 0;
+	} else {
+		while ($row = mysqli_fetch_assoc($r)) {
+			$curr_qty = $row['quantity'];
+		}
 	}
 }
+
 ?>
 
 <title>CAS 100 - <?php echo $na ?></title>
@@ -49,23 +75,36 @@ if (isset($_GET['id'])) {
 				<div class="number pt-2">
 					<p class='quantity_helper'>QUANTITY</p>
 					<span class="minus">-</span>
-					<input id="qty" name="quantity" type="text" value="1" max="999" min="1" />
+					<input id="qty" name="quantity" type="text" value="1" max="<?php echo $lim ?>" min="1" />
 					<span class="plus">+</span>
 				</div>
-				<div class="pt-5">
+				<div class="pt-3">
+					<?php echo $msg ?>
+				</div>
+				<div class="pt-2">
 					<?php if (isset($_SESSION['login'])) { ?>
-						<button type="submit" class="w-100 btn-lg btn btn-primary" name="add_to_cart">Add to Cart</button>
-
+						<?php if ($st == 0) { ?>
+							<button type="button" class="w-100 btn-lg btn btn-primary" disabled>Out of Stock</button>
+						<?php } else { ?>
+							<button type="submit" class="w-100 btn-lg btn btn-primary" name="add_to_cart">Add to Cart</button>
+						<?php } ?>
 					<?php } else { ?>
 						<button type="button" class="w-100 btn-lg btn btn-primary" onclick="window.location.href='login.php?s=req'">Login to Add Item to Cart</button>
 					<?php } ?>
 				</div>
 				<div class="pt-2">
 					<hr>
-					<div class=" d-inline-flex">
+					<div class="d-inline-flex">
 						<i class="fa-solid fa-location-dot pt-1"></i>
 						<p class="px-2 free_shipping">Free shipping anywhere in NZ or pick up at CAS.</p>
 					</div>
+					<?php if ($lim > 0) { ?>
+						<p><i class="fa-solid fa-hand"></i> Limit per customer: <span class="fw-bold"><?php echo $lim ?></span> items</p>
+					<?php } ?>
+					<!-- Hidden input fields to pass data to JS -->
+					<input type="hidden" id='lim' value="<?php echo $lim ?>">
+					<input type="hidden" id='curr_qty' value="<?php echo $curr_qty ?>">
+
 				</div>
 			</div>
 		</div>
@@ -96,6 +135,20 @@ if (isset($_GET['id'])) {
 							<p><?php echo $na ?></p>
 						</div>
 					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+					<button type="button" class="btn btn-primary" onclick="window.location.href='cart.php?id=<?php if (isset($_SESSION['login'])) echo $_SESSION['id'] ?>'">Go to Cart</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="warningModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-triangle-exclamation"></i> Limit <?php echo $lim ?> items per customer!</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>

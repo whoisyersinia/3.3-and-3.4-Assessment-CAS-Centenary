@@ -66,7 +66,7 @@ if (!isset($_SESSION['login'])) {
 		$cart_id = $_SESSION['cart']['id'];
 
 		// join cart_items to cart
-		$q = "SELECT product.id, product.name, product.price, product.stock, product.image, cart.total_price, cart_item.quantity FROM `product` 
+		$q = "SELECT product.id, product.name, product.price, product.stock, product.image, product.limit_per_customer, cart.total_price, cart_item.quantity FROM `product` 
 		LEFT JOIN `cart_item` ON product.id = cart_item.product_id 
 		LEFT JOIN `cart` ON cart.id = cart_item.cart_id
 		WHERE cart_item.cart_id = '$cart_id'
@@ -83,6 +83,7 @@ if (!isset($_SESSION['login'])) {
 			$picture = $row['image'];
 			$qty = $row['quantity'];
 			$total_price = $row['total_price'];
+			$lim = $row['limit_per_customer'];
 
 			$total_product_price += $price * $qty;
 
@@ -105,7 +106,7 @@ if (!isset($_SESSION['login'])) {
 					<th>
 						<div class='number pt-2 pb-3'>
 							<span id='minus' class='minus'>-</span>
-							<input data-product-id='$id' value='$qty' name='quantity' type='text' value='1' max='999' min='1' />
+							<input data-product-id='$id' data-limit='$lim' value='$qty' name='quantity' type='text' value='1' max='999' min='1' />
 							<span id='plus' class='plus'>+</span>
 						</div>
 						<a class='text-decoration-none text-primary' href='deletecartitem.php?id=$id'><i class='fa-solid fa-trash-can pe-2'></i>Remove</a>
@@ -182,6 +183,16 @@ if (!isset($_SESSION['login'])) {
 			</div>
 		</div>
 	<?php } ?>
+	<div class="modal fade" id="warningModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-triangle-exclamation"></i> Exceeded item limit per customer!</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 <?php

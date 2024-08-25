@@ -142,43 +142,111 @@ $(document).ready(function () {
 
 // trigger when form is submitted
 // runs the form without it reloading using ajax, when success shows modal if not prints console.log error (for development)
+
 $(document).ready(function () {
   $("#shop_form").on("submit", function (e) {
     let qty = document.getElementById("qty").value;
     let cart_total_qty = document.getElementById("cart_total");
-    e.preventDefault();
-    $.ajax({
-      type: $(this).attr("method"),
-      url: $(this).attr("action") + "&qty=" + qty,
-      data: $(this).serialize(),
-      success: function () {
-        let currentTotal = parseInt(cart_total_qty.textContent);
-        let currentQty = parseInt(qty);
+    let lim = parseInt(document.getElementById("lim").value);
 
-        cart_total_qty.textContent = currentTotal + currentQty;
-        console.log(cart_total_qty.innerHTML);
-        $("#cartModal").modal("show");
-        console.log("success");
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      },
-    });
+    if (
+      parseInt(document.getElementById("curr_qty").value) + parseInt(qty) >
+      lim
+    ) {
+      $("#warningModal").modal("show");
+      return false;
+    } else {
+      e.preventDefault();
+      $.ajax({
+        type: $(this).attr("method"),
+        url: $(this).attr("action") + "&qty=" + qty,
+        data: $(this).serialize(),
+        success: function () {
+          let currentTotal = parseInt(cart_total_qty.textContent);
+          let currentQty = parseInt(qty);
+
+          document.getElementById("curr_qty").value =
+            parseInt(document.getElementById("curr_qty").value) + currentQty;
+          cart_total_qty.textContent = currentTotal + currentQty;
+
+          $("#cartModal").modal("show");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        },
+      });
+    }
   });
 
   // update cart item quantity in real time using ajax
   if (window.location.pathname.endsWith("cart.php")) {
     $("input[name='quantity']").change(function () {
-      var newQuantity = $(this).val();
-      var productId = $(this).data("product-id");
-      $.ajax({
-        url: "updatecart.php",
-        type: "post",
-        data: { quantity: newQuantity, product_id: productId },
-        success: function (response) {
-          location.reload(); // Reload the page to get the updated cart
-        },
-      });
+      let newQuantity = $(this).val();
+      let productId = $(this).data("product-id");
+      let limit = $(this).data("limit");
+      console.log(limit);
+
+      if (parseInt(newQuantity) > parseInt(limit)) {
+        $("#warningModal").modal("show");
+        this.value = limit;
+        return false;
+      } else {
+        $.ajax({
+          url: "updatecart.php",
+          type: "post",
+          data: { quantity: newQuantity, product_id: productId },
+          success: function () {
+            location.reload(); // Reload the page to get the updated cart
+          },
+        });
+      }
     });
   }
 });
+
+// Restricts input for the given textbox to the given inputFilter function.
+function setInputFilter(textbox, inputFilter, errMsg) {
+  [
+    "input",
+    "keydown",
+    "keyup",
+    "mousedown",
+    "mouseup",
+    "select",
+    "contextmenu",
+    "drop",
+    "focusout",
+  ].forEach(function (event) {
+    textbox.addEventListener(event, function (e) {
+      if (inputFilter(this.value)) {
+        // Accepted value.
+        if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+          this.classList.remove("input-error");
+          this.setCustomValidity("");
+        }
+
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        // Rejected value: restore the previous one.
+        this.classList.add("input-error");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        // Rejected value: nothing to restore.
+        this.value = "";
+      }
+    });
+  });
+}
+
+setInputFilter(
+  document.getElementById("qty"),
+  function (value) {
+    return /^(\s*|\d+)$/.test(value); // Allow digits only.
+  },
+  "Only digits allowed"
+);

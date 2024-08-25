@@ -100,9 +100,6 @@ while ($row = mysqli_fetch_assoc($r)) {
 	);
 }
 
-
-
-
 ?>
 
 <title>CAS100 - Inventory</title>
