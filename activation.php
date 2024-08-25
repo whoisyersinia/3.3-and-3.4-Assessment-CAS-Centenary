@@ -58,9 +58,9 @@ if (
 	$mail->SMTPSecure = "tls";
 	$mail->Port = 587;
 	$mail->Username = 'anicus.noreply@gmail.com';
-	$mail->Password = 'lwtllspvcqknusgd';
+	$mail->Password = 'ydgq aauu ihkg foyw';
 
-	$mail->setFrom('anicus.noreply@gmail.com', 'Anicus');
+	$mail->setFrom('anicus.noreply@gmail.com', 'CAS 100');
 	$mail->addAddress($e, $u);
 
 	$mail->Subject = 'Activate your account';

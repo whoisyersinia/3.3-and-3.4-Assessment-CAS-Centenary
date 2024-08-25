@@ -178,7 +178,7 @@ if (!isset($_SESSION['login'])) {
 					<p class="">Grand total</p>
 					<p class="fw-bold">$<?php echo $total_price ?>.00</p>
 				</div>
-				<button class="btn btn-lg btn-primary w-100">Checkout now</button>
+				<button class="btn btn-lg btn-primary w-100" onclick="window.location.href='checkout.php?id=<?php echo $_SESSION['id'] ?>'">Checkout now</button>
 			</div>
 		</div>
 	<?php } ?>

@@ -35,24 +35,9 @@ if (isset($_GET['qty'])) {
 	$quantity = $_GET['qty'];
 }
 
-
-// check if user has a cart
-
-$query = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id')";
-$result =  mysqli_query($conn, $query);
-
 date_default_timezone_set("Pacific/Auckland");
 $now = time();
 $datetime = date("Y-m-d H:i:s", $now);
-if (mysqli_num_rows($r) == 0) {
-	// create cart
-	$q = "INSERT INTO `cart` (`user_id`, `created_at`, `modified_at`) VALUES ('$user_id', '$datetime', '$datetime')";
-	var_dump($q);
-	$r =  mysqli_query($conn, $q);
-}
-// select user cart
-$_SESSION['cart'] = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
 
 // check if item already in cart
 $q = "SELECT * FROM `cart_item` WHERE (`cart_id` = '" . $_SESSION['cart']['id'] . "' AND `product_id` = '$id')";

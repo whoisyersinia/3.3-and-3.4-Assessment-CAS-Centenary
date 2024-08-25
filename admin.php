@@ -1,7 +1,6 @@
 <?php
 require_once('./includes/basehead.html');
 include('header.php');
-session_start();
 
 if (isset($_SESSION['login'])) {
 	if ($_SESSION['admin'] == 0) {

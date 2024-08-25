@@ -166,6 +166,7 @@ $(document).ready(function () {
     });
   });
 
+  // update cart item quantity in real time using ajax
   if (window.location.pathname.endsWith("cart.php")) {
     $("input[name='quantity']").change(function () {
       var newQuantity = $(this).val();

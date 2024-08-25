@@ -3,6 +3,10 @@ require_once("./includes/connectlocal.inc");
 require_once('./includes/basehead.html');
 
 session_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 
 // check if user has logged in - if not 403 foribbden error
 
@@ -178,7 +182,7 @@ if ($errors) {
 
 				<button class="btn btn-lg btn-tertiary text-white border-primary w-100" type="button" onclick="window.location.href='stock.php'">Cancel</button>
 
-				<button class="btn btn-lg btn-primary w-100" type="submit" name="confirm">Confirm</button>
+				<button class="btn btn-lg btn-primary w-100" type="submit" name="submit">Confirm</button>
 			</div>
 			<p class="mt-5 mb-3 text-muted text-center text-light">&copy; Christchurch Adventist School 2024-2025</p>
 		</form>

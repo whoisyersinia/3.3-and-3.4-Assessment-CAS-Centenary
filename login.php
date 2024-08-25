@@ -3,8 +3,6 @@ require_once('./includes/connectlocal.inc');
 require_once('./includes/basehead.html');
 session_start();
 
-
-
 // if user is redirected to login page
 if (!empty($_GET['s'])) {
 	echo "<div class='alert alert-danger alert-dismissable d-flex align-items-center fade show fixed-top' role='alert'>";
@@ -59,21 +57,24 @@ if (isset($_POST['login'])) {
 			$_SESSION = mysqli_fetch_array($r, MYSQLI_ASSOC);
 			$_SESSION['login'] = true;
 
-			//add cart to session
 			$user_id = $_SESSION['id'];
 			date_default_timezone_set("Pacific/Auckland");
 			$now = time();
 			$datetime = date("Y-m-d H:i:s", $now);
 
-			$q = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id')";
+			// checks if cart already exists and not been ordered
+			$q = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id' AND `ordered` = 0)";
 			$result =  mysqli_query($conn, $q);
+			// if not create new cart
 			if (mysqli_num_rows($result) == 0) {
-				$q = "INSERT INTO `cart` (`user_id`, `created_at`, `modified_at`) VALUES ('$user_id', '$datetime', '$datetime')";
+				$q = "INSERT INTO `cart` (`user_id`, `created_at`, `modified_at`, `ordered`) VALUES ('$user_id', '$datetime', '$datetime', 0)";
+				$r =  mysqli_query($conn, $q);
+
+				$q = "SELECT * FROM `cart` WHERE (`user_id` = '$user_id' AND `ordered` = 0)";
 				$result =  mysqli_query($conn, $q);
 			}
 
 			$_SESSION['cart'] = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			mysqli_free_result($r);
 			mysqli_close($conn);
 
 			ob_end_clean();
