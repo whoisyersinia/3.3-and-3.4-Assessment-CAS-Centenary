@@ -13,7 +13,7 @@ $errors = array();
 if (isset($_POST['regi'])) {
 	$trimmed = array_map('trim', $_POST);
 
-	if (empty($_POST['password'] || $_POST['email'] || $_POST['username'])) {
+	if (empty($_POST['password'] || empty($_POST['email']) || empty($_POST['username']))) {
 		array_push($errors, "Fields empty!");
 	} else {
 
@@ -29,7 +29,7 @@ if (isset($_POST['regi'])) {
 
 		if (preg_match($re, $trimmed['password'])) {
 			if ($_POST['password'] == $_POST['conf_password']) {
-				$p = mysqli_real_escape_string($conn, $trimmed['password']);
+				$p = mysqli_real_escape_string($conn, $_POST['password']);
 				$p = hash('sha256', $p);
 			} else {
 				array_push($errors, "Your passwords do not match!");
@@ -39,9 +39,9 @@ if (isset($_POST['regi'])) {
 		}
 
 		// username validation
-		if (preg_match('/^\w{2,}$/', $trimmed['username'])) {
-			if (preg_match('/^\w{2,16}$/', $trimmed['username'])) {
-				$u = mysqli_real_escape_string($conn, $trimmed['username']);
+		if (preg_match('/^\w{2,}$/', $_POST['username'])) {
+			if (preg_match('/^\w{2,16}$/', $_POST['username'])) {
+				$u = mysqli_real_escape_string($conn, $_POST['username']);
 			} else {
 				array_push($errors, "Your username exceeds the chracter limit (16) or special character added!");
 			}
@@ -73,7 +73,7 @@ if ($e && $p && $u) {
 			$a = md5(uniqid(rand(), true));
 
 			//create user
-			$query = "INSERT into `user` (`username`, `email`, `password`, `graduated_year`, `token`,`activated`, `activation_expiry`) VALUES ('$u', '$e', '$p', '$grad_year', '$a', 0, '$date_thirtyminutes')";
+			$query = "INSERT into `user` (`username`, `email`, `password`, `token`,`activated`, `activation_expiry`) VALUES ('$u', '$e', '$p', '$a', 0, '$date_thirtyminutes')";
 
 			$result = mysqli_query($conn, $query);
 
@@ -120,30 +120,25 @@ if ($errors) {
 						<h1 class="h1 mb-3 fw-semibold text-primary">Create an Account</h1>
 						<div class="form-floating">
 							<input name="username" type="text" class="form-control border border-3 border-info" placeholder="Username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>">
-							<label for="floatingInput">Username*</label>
+							<label for="floatingInput">Username<span class="text-warning">*</span></label>
 							<div id="usernameHelp" class="form-text text-info">You cannot include special characters (e.g '$'' or '@')</div>
 						</div>
 
 						<div class="form-floating mt-2">
 							<input name="email" type="email" class="form-control border border-3 border-info" placeholder="name@example.com" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
-							<label for="floatingInput">Email address*</label>
+							<label for="floatingInput">Email address<span class="text-warning">*</span></label>
 							<div id="emailHelp" class="form-text text-info">We'll never share your email with anyone else</div>
 						</div>
 
 						<div class="form-floating mt-2">
 							<input name="password" type="password" class="form-control border border-3 border-info" placeholder="Password">
-							<label for="floatingPassword">Password*</label>
+							<label for="floatingPassword">Password<span class="text-warning">*</span></label>
 							<div id="passwordHelp" class="form-text text-info">Your password must be at least 7 characters long</div>
 						</div>
 
 						<div class="form-floating mt-2">
 							<input name="conf_password" type="password" class="form-control border border-3 border-info" placeholder="Confirm password">
-							<label for="floatingPassword">Confirm Password*</label>
-						</div>
-
-						<div class="form-floating mt-3">
-							<input name="grad_year" type="number" class="form-control border border-3 border-info" value="2024" max="2024" min="1925" step="1">
-							<label for="floatingPassword">Graduation Year (if applicable)</label>
+							<label for="floatingPassword">Confirm Password<span class="text-warning">*</span></label>
 						</div>
 
 						<br>

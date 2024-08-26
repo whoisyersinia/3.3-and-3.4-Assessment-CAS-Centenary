@@ -80,24 +80,23 @@ if (isset($_GET['id'])) {
 	$mail->setFrom('anicus.noreply@gmail.com', 'CAS 100');
 	$mail->addAddress($e, $u);
 
-	$mail->Subject = 'Your order has been canceled!';
+	$mail->Subject = 'Your Order has been Cancelled!';
 
 	$mail->isHTML(true);
 
 	$mailContent =
-		"	
-			<h1>Order Canceled!</h1>
-			<p>Your order has been canceled due to unforseen circumstances. Please call us for more information!</p>
-			<p>$u, here is your receipt!</p>
-			<br>
-			<h4>Your order:</h4>
-			<p>Order ID: #$order_id</p>
-			<p>Total Price: $$total_price.00</p>
-			<br>
-			<p>Christchurch Adventist School</p>
-			<p>15 Grants Road, Papanui, Christchurch, New Zealand, 8052.</p>
-			<img src='cid:logo' alt='logo'>
-			";
+		"	<h1>Order Canceled!</h1>
+		<p>Your order has been canceled due to unforseen circumstances. Please call us for more information!</p>
+		<p>$u, here is your receipt!</p>
+		<br>
+		<h4>Your order:</h4>
+		<p>Order ID: #$order_id</p>
+		<p>Total Price: $$total_price.00</p>
+		<br>
+		<p>Christchurch Adventist School</p>
+		<p>15 Grants Road, Papanui, Christchurch, New Zealand, 8052.</p>
+		<img src='cid:logo' alt='logo'>
+		";
 	$mail->Body = $mailContent;
 
 	if ($mail->send()) {

@@ -38,7 +38,11 @@ if (isset($_GET['id'])) {
 		$msg = NULL;;
 	}
 
-	$cart_id = $_SESSION['cart']['id'];
+	if (isset($_SESSION['cart'])) {
+		$cart_id = $_SESSION['cart']['id'];
+	} else {
+		$cart_id = NULL;
+	}
 
 	$q = "SELECT cart_item.quantity FROM `product` 
 		LEFT JOIN `cart_item` ON product.id = cart_item.product_id 

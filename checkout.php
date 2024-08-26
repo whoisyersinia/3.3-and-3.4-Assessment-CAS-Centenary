@@ -47,7 +47,7 @@ if (!isset($_SESSION['login'])) {
 		$q = "SELECT * FROM `cart` WHERE (`id` = '$cart_id')";
 		$r = mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
 		while ($row = mysqli_fetch_assoc($r)) {
-			$total_price = $row['total_price'];
+			$total_price = floatval($row['total_price']);
 		}
 	} else {
 		http_response_code(404);
