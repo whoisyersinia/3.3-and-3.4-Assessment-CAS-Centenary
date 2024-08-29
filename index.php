@@ -5,7 +5,6 @@
 include('./includes/basehead.html');
 require_once('header.php');
 
-
 ?>
 
 <head>
@@ -60,10 +59,10 @@ require_once('header.php');
 
 
 	?>
-	<div class="w-100 vh-100 d-flex justify-content-center align-items-center z-0">
+	<div class="w-100 vh-100 d-flex justify-content-center align-items-center overflow-hidden">
 		<div class="container-fluid pt-5">
-			<div class="row">
-				<div class="col-md-6 col-sm-3">
+			<div class="row row-cols-sm-1">
+				<div class="col-md-6 col-sm-1">
 					<div class="px-5 text-left content">
 						<div class="hstack gap-3">
 							<p class="lead text-primary mb-4 text-shadow-1">100 Years</p>
@@ -78,106 +77,119 @@ require_once('header.php');
 							<h1 class="fw-bold main-text start_fade-left m-0 strokeme">Responsibility</h1>
 							<h1 class="fw-bold main-text start_fade-left m-0 strokeme">Integrity</h1>
 						</div>
-						<div class="px-5 my-5 content">
-							<button type='button' class='btn btn-primary btn-rounded btn-lg px-4' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up' onclick="window.location.href='reunion.php'">Former students?</button>
+						<div class="px-5 my-5 content d-flex gap-2">
+							<button type='button' class='btn btn-primary btn-rounded btn-lg px-4' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up' onclick="window.location.href='reunion.php'">Former student?</button>
 							<button type='button' class='btn btn-outline-primary btn-rounded btn-lg px-5' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #2b0806;' id='sign_up' onclick="window.location.href='store.php'">Visit the Store</button>
 						</div>
 					</main>
 				</div>
-				<div class="col-md-6 col-sm-3 text-center">
+				<div class="col-md-6 col-sm-1 text-center">
 					<img src="images/logo2.svg" class="img-fluid mx-auto cas-logo pt-5" alt="">
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid overflow-hidden px-4 py-5 bg-dark w-100 shadow-lg">
-		<div class="row">
-			<div class="col-md-7">
-				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg hover-zoom card_img">
-					<div class="d-flex flex-column h-100 px-4 pt-5 mt-5 text-white text-shadow-1">
-						<ul class="d-flex list-unstyled mt-auto">
-							<li class="me-auto pt-5 mt-5">
-								<img class="rounded-circle border border-white" src="./images/cat_transparent.svg" width="32" height="32" alt="logo" loading="lazy">
-							</li>
-							<li class="d-flex align-items-center">
-								<a class="text-decoration-none text-white pt-5 mt-5"><small>Anicus 2023</small></a>
-							</li>
-						</ul>
+	<div class="px-5 py-5 bg-primary w-100 vh-50 shadow-lg">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-7 ">
+					<div class="school_card card card-cover overflow-hidden text-bg-light rounded-4 hover-zoom card_img">
+					</div>
+				</div>
+				<div class="col-md-5 text-end fade-right text-white reveal_once mt-2">
+					<h1 class="fw-bold">Centenary Reunion <span class="text-white text_effect">2025</span></h1>
+					<p>Join us as we celebrate and commemorate the 100th Centenary of Christchurch Adventist School. From the 25 to 27th of April 2025, we will hold a series of events to celebrate the school's history and achievements. This event is open for our former students, friends and family. Save your spot by booking here!</p>
+					</p>
+
+					<button type='button' class='btn btn-light btn-rounded btn-lg px-4 w-50' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #ffffff;' id='sign_up' onclick="window.location.href=' rsvp.php'">Book Now</button>
+
+					<div class="text-start">
+						<h1 class="fw-bold mt-5">From humble <span class="text-white text_effect">beginnings</span>...</h1>
+						<p>Christchurch Adventist School was officially opened on April 27, 1925, at 15 Grants Road, Papanui, Christchurch. It started with an enrollment of 22 students. Maud Smart was their teacher and remained in charge with a handful of assistants until 1933. Statistics for 1934 mention three teachers caring for 43 students from grades 1 through 10.
+						</p>
+						<button type='button' class='btn btn-outline-light btn-rounded btn-lg px-4 w-50' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #ffffff;' id='sign_up' onclick="window.location.href='history.php'">Read More</button>
 					</div>
 
 				</div>
 			</div>
-			<div class="col-md-5 text-end m-0 fade-right reveal_once">
-				<h2 class="fw-bold ">Welcome to the <span class="text-white text_effect">World of Anime.</span></h2>
-				<p>Anime is a type of animation originating from Japan. It has a wide range of genres for all type of viewers, including, but not limted to: <span class="fw-bold">action, drama, romance, comedy, horror, fantasy, sports, sci-fi, 'slice of life'</span> etc.</p>
-				<hr>
-				</hr>
-				<h4>Don't know where to start?</h4>
-
-				<div class="d-inline-flex">
-					<i class="fa-solid fa-check pt-1 px-2"></i>
-					<a href="listsearch.php" class="text-decoration-underline text-primary">
-						<h5 class="text-muted">Check our 'Anime for Beginners Lists'</h5>
-					</a>
+		</div>
+	</div>
+	<section class="home-testimonial pb-5">
+		<div class="container-fluid">
+			<div class="row d-flex justify-content-center testimonial-pos">
+				<div class="col-md-12 pt-4 d-flex justify-content-center">
+					<h3>Our Alumni</h3>
 				</div>
-				<!--SEARCH FORM-->
-				<form class="d-inline-flex pt-2" action="search.php" method="GET">
-					<input class="form-control me-2" type="search" placeholder="Search for anime" aria-label="Search" name="searchterm" required>
-					<button class="btn btn-outline-primary" type="submit" name="search">Search</button>
-				</form>
+				<div class="col-md-12 d-flex justify-content-center">
+					<h2>100 Years of Educating for Etenrity</h2>
+				</div>
 			</div>
-		</div>
-
-	</div>
-
-	<div class="overflow-hidden container-fluid my-5">
-		<div class="row">
-			<div class="promo_text text-primary">
-				<h3 class="fw-bold">Create your own list</h3>
-				<p>Tired of keeping track of all the Anime you've watched?</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="container-fluid px-4 py-5 bg-dark w-100">
-		<div class="row">
-			<div class="col-md-7 px-4">
-				<h2 class="fw-bold">Anime listing made easy <span class="text-muted text_effect">with us.</span></h2>
-				<h4 class="fs-4">Get familiar with our format.</h4>
-				<div class="d-flex justify-content-center align-content-center pt-sm-2 mt-auto">
-					<div class='card border-black border-2 ' style='width: 18rem;'>
-						<img src='./images/bg-4.png' class='card-img-top' alt='card-img'>
-						<div class='card-body mx-1'>
-							<h5 class='card-title text-break fw-bold text-clamp' style='font-size: clamp(1rem, 1.3vw, 1.5rem);'>Best Anime Ever</h5>
-							<h6 class='card-subtitle mb-2 text-wrap text-tertiary text-wrap'>Adventure, Fantasy</h6>
-							<h6 class='card-subtitle mb-2 text-wrap  text-wrap'>This is the best anime ever!!!!</h6>
-							<div class='pt-2 pb-2 d-flex gap-2 justify-content-start align-content-start'>
-								<button type='button' class='btn btn-success btn-sm border-black text-white disabled'> <i class='fa-solid fa-plus pe-2'></i>Add to list
-								</button>
-								<button type='button' class='btn btn-info btn-sm border-black disabled'>Read More</button>
+			<section class="home-testimonial-bottom">
+				<div class="container testimonial-inner">
+					<div class="row d-flex justify-content-center">
+						<div class="col-md-4 style-3">
+							<div class="tour-item ">
+								<div class="tour-desc bg-white">
+									<div class="tour-text color-grey-3 text-center">&ldquo;A special congratulations to CAS for their 100th anniversary. My time at CAS has been defined by one word - blessed. I have sincere gratitude to the staff of the past and present. I hope that CAS continues to equip our young people with the tools they need for life as well as for eternity.&rdquo;</div>
+									<div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people" src="./images/marcus.jpg" alt=""></div>
+									<div class="link-name d-flex justify-content-center">Marcus Demafeliz</div>
+									<div class="link-position d-flex justify-content-center">2024 Graduate</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 style-3">
+							<div class="tour-item ">
+								<div class="tour-desc bg-white">
+									<div class="tour-text color-grey-3 text-center">&ldquo;CAS honours a century of learning, growth, and community. As we reflect on our rich history, we express gratitude to all who have contributed to our journey. Here’s to continuing our legacy of success and shaping bright futures for generations to come. Happy 100th Anniversary!&rdquo;</div>
+									<div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people" src="./images/otylia.jpg" alt=""></div>
+									<div class="link-name d-flex justify-content-center">Otylia Zeng</div>
+									<div class="link-position d-flex justify-content-center">2024 Graduate</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 style-3">
+							<div class="tour-item ">
+								<div class="tour-desc bg-white">
+									<div class="tour-text color-grey-3 text-center">&ldquo;Happy 100th Anniversary to CAS! For a century, we’ve inspired minds, fostered growth, and built a community rooted in learning and friendship. As we celebrate this remarkable milestone, we thank everyone who has been a part of our journey and look forward to a bright future ahead.​&rdquo;</div>
+									<div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people" src="./images/aeirone.jpg" alt=""></div>
+									<div class="link-name d-flex justify-content-center">Aeirone Felipe</div>
+									<div class="link-position d-flex justify-content-center">2024 Graduate</div>
+								</div>
 							</div>
 						</div>
 					</div>
+			</section>
+	</section>
+	<section class="vh-100 bg-light home-mv">
+		<div class="container-fluid py-5 h-100">
+			<div class="row d-flex align-items-center h-100">
+				<div class="col col-lg-6 mb-4 mb-lg-0 ">
+					<figure class="text-center bg-white py-5 px-4 shadow-2" style="border-radius: .75rem;">
+						<h4 style="color:#2F4582;">Our Mission</h4>
+						<blockquote class="blockquote">
+							<p>
+								<span class="lead font-italic">Educating for eternity through GROWTH [an acronym for Godliness, Rich Relationships, Ownership, Wisdom, Transformational learning & Harvest] is the expression of curriculum and the guide for teaching and learning practice at Christchurch Adventist School.
+								</span>
+							</p>
+						</blockquote>
+					</figure>
 				</div>
-			</div>
-			<div class="col-md-5 pt-3">
-				<div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg hover-zoom card_img_2">
-					<div class="d-flex flex-column h-100 p-5 pb-3 mt-5 text-white text-shadow-1">
-						<ul class="d-flex list-unstyled mt-auto">
-							<li class="me-auto pt-5 mt-5">
-								<img class="rounded-circle border border-white" src="./images/cat_transparent.svg" width="32" height="32" alt="logo" loading="lazy">
-							</li>
-							<li class="d-flex align-items-center">
-								<a class="text-decoration-none text-white pt-5 mt-5"><small>Anicus 2023</small></a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<div class="col col-lg-6">
+					<figure class="text-center bg-white py-5 px-4 shadow-2" style="border-radius: .75rem;">
+						<h4 style="color:#2F4582;">Our Vision</h4>
+						<blockquote class="blockquote">
+							<p>
+								<span class="lead font-italic">To go beyond one hallway...
+									Celebrating GROWTH is allowing time for the recognition of achievement in all areas of the GROWTH vision, both small and great.
 
-				</p>
+								</span>
+							</p>
+						</blockquote>
+					</figure>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </body>
 
 <?php

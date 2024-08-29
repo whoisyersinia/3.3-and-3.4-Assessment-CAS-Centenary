@@ -169,7 +169,7 @@ if ($errors) {
 
 
 <body>
-	<form method="post">
+	<form method="post" id="checkout">
 		<div class="row container-fluid pt-5 mt-5">
 			<div class="col-md-8">
 				<div class="d-flex justify-content-start px-5">
@@ -222,6 +222,18 @@ if ($errors) {
 			</div>
 		</div>
 	</form>
+
+	<div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Processing your order...</h1>
+				</div>
+				<p class="fs-5 text-warning px-2">Please do not exit this page!</p>
+				<img src="./images/loadingcute.gif" alt="loading gif" class="img-fluid ">
+			</div>
+		</div>
+	</div>
 </body>
 
 <?php

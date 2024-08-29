@@ -41,6 +41,10 @@ if (isset($_GET['id'])) {
 		$grad_year = "N/A";
 	}
 
+	if ($ph == NULL) {
+		$ph = "N/A";
+	}
+
 
 	if (mysqli_num_rows($r) == 0) {
 		http_response_code(404);
@@ -75,7 +79,7 @@ if (isset($_GET['id'])) {
 					<p>Alumni: <span class="fw-bold"><?php echo $al ?></span></p>
 					<p>Graduated Year: <span class="fw-bold"><?php echo $grad_year ?></span></p>
 					<p>RSVP Status: <span class="fw-bold"><?php echo $status ?></span></p>
-					<button class="btn btn-lg btn-primary w-100" onclick="window.location.href='order.php'">Go back</button>
+					<button class="btn btn-lg btn-primary w-100" onclick="window.location.href='event.php'">Go back</button>
 					<?php if ($status == 'pending') { ?>
 						<div class="d-flex">
 							<button class="btn btn-lg btn-outline-success w-100 mt-2 me-3" onclick=<?php echo $paid_url ?>><i class='fa-solid fa-check'></i> Confirm</button>

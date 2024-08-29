@@ -116,7 +116,7 @@ if ($errors) {
 			</div>
 			<div class="col-md-6 col-sm-3 justify-content-center align-content-center">
 				<main class="text-center w-auto m-auto px-5 mx-5 py-4">
-					<form method="POST" action="register.php">
+					<form method="POST" action="register.php" id="register">
 						<h1 class="h1 mb-3 fw-semibold text-primary">Create an Account</h1>
 						<div class="form-floating">
 							<input name="username" type="text" class="form-control border border-3 border-info" placeholder="Username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>">
@@ -142,8 +142,8 @@ if ($errors) {
 						</div>
 
 						<br>
-						<div class="checkbox mb-3 mt-1">
-							<p class="text-info">Already have an account?<a href="login.php" class="text-primary text-decoration-none"> Sign in.</a></p>
+						<div class="checkbox mb-3">
+							<p class="text-primary">Already have an account?<a href="login.php" class="text-info text-decoration-none"> Sign in.</a></p>
 						</div>
 
 						<button class="w-100 btn btn-lg btn-primary" type="submit" name="regi">Create Account</button>
@@ -152,6 +152,17 @@ if ($errors) {
 					</form>
 				</main>
 			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Processing your request...</h1>
+			</div>
+			<p class="fs-5 text-warning px-2">Please do not exit this page!</p>
+			<img src="./images/loadingcute.gif" alt="loading gif" class="img-fluid ">
 		</div>
 	</div>
 </div>

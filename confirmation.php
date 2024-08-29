@@ -53,7 +53,7 @@ if (isset($_GET['id'], $_GET['order_id'])) {
 <body>
 	<div class="row container-fluid d-flex justify-content-center align-content-lg-center vh-100 w-100">
 		<div class="col-md-8 text-center border rounded-3 border-gray border-1 p-5">
-			<h3><?php echo $username ?>, your order has been recieved by us!</h3>
+			<h3><?php echo $username ?>, your order has been received by us!</h3>
 			<h5 class=" text-start pt-2">Your order:</h5>
 			<p class="text-start text-muted">Order ID: #<?php echo $order_id ?></p>
 			<div class="mx-auto">

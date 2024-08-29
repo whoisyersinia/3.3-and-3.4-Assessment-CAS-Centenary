@@ -48,7 +48,7 @@ if (nav_button != null) {
 
 if (nav != null) {
   window.addEventListener("scroll", function () {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 10) {
       nav.classList.add("bg-light", "shadow");
     } else {
       nav.classList.remove("bg-light", "shadow");
@@ -204,6 +204,54 @@ $(document).ready(function () {
 // runs the form without it reloading using ajax, when success shows modal if not prints console.log error (for development)
 
 $(document).ready(function () {
+  $("#checkout").on("submit", function () {
+    $("#loadingModal").modal("show");
+    $.ajax({
+      type: $(this).attr("method"),
+      url: $(this).attr("action"),
+      data: $(this).serialize(),
+
+      success: function () {
+        $("#loadingModal").modal("hide");
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+  });
+
+  $("#rsvp").on("submit", function () {
+    $("#loadingModal").modal("show");
+    $.ajax({
+      type: $(this).attr("method"),
+      url: $(this).attr("action"),
+      data: $(this).serialize(),
+
+      success: function () {
+        $("#loadingModal").modal("hide");
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+  });
+
+  $("#register").on("submit", function () {
+    $("#loadingModal").modal("show");
+    $.ajax({
+      type: $(this).attr("method"),
+      url: $(this).attr("action"),
+      data: $(this).serialize(),
+
+      success: function () {
+        $("#loadingModal").modal("hide");
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      },
+    });
+  });
+
   $("#shop_form").on("submit", function (e) {
     let qty = document.getElementById("qty").value;
     let cart_total_qty = document.getElementById("cart_total");
@@ -217,6 +265,7 @@ $(document).ready(function () {
       return false;
     } else {
       e.preventDefault();
+
       $.ajax({
         type: $(this).attr("method"),
         url: $(this).attr("action") + "&qty=" + qty,

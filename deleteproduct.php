@@ -2,6 +2,13 @@
 require_once('./includes/basehead.html');
 require_once("./includes/connectlocal.inc");
 
+session_start();
+
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 
 // check if user has logged in - if not 403 foribbden error
 
@@ -36,6 +43,7 @@ if (isset($_GET['id'])) {
 	while ($row = mysqli_fetch_assoc($r)) {
 		$na = $row['name'];
 	}
+
 	if (isset($_POST['confirm'])) {
 		$t1 = $_POST['delete'];
 		if (empty($t1)) {
@@ -43,6 +51,10 @@ if (isset($_GET['id'])) {
 		}
 
 		if ($_POST['delete'] === $na) {
+
+			$q = "DELETE FROM `cart_item` WHERE (`product_id` = '$id')";
+			$result =  mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
+
 			$q = "DELETE FROM `product` WHERE (`id` = '$id')";
 			$r =  mysqli_query($conn, $q) or trigger_error("Query: $q\b<br/>MySQL Error: " . mysqli_error($conn));
 

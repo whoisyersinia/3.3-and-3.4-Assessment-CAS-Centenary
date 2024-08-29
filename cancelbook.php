@@ -90,7 +90,7 @@ if (isset($_GET['id'])) {
 			<p>
 			<br>
 			<h4>Your order:</h4>
-			<p>Booking ID: #$rsvp_id</p>
+			<p>Booking ID: #$booking_id</p>
 			<h5>Event: $event_name</h5>
 			<p>$desc</p>
 			<p>$start - $end</p>

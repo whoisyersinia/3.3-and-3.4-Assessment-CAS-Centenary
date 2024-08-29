@@ -67,6 +67,17 @@ if (isset($_GET['id'])) {
 	<div class="row mt-3 pt-2 container-fluid"></div>
 	<form method="post" id='shop_form' action="addtocart.php/?id=<?php echo $id ?>">
 		<div class="row container-fluid mt-5 pt-5 align-self-md-stretch mx-auto px-5">
+			<div class="d-flex justify-content-start px-3">
+				<a class="text-muted pe-1 text-decoration-none icon-link-hover" href="store.php">Store </a>
+				<span class='text-muted'>></span>
+				<a class="text-primary ps-1 pe-1 text-decoration-none">Product </a>
+				<?php if (isset($_SESSION['cart'])) { ?>
+					<span class="text-muted">></span>
+					<a class="text-decoration-none" href="cart.php?id=<?php echo $_SESSION['id'] ?>">
+						<p class="ps-1 text-muted"> Cart</p>
+					</a>
+				<?php } ?>
+			</div>
 			<div class="col-md-4">
 				<img src="./product_images/<?php echo $pic ?>" alt="" class="img-fluid">
 			</div>

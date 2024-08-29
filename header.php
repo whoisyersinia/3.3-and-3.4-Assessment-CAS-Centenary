@@ -2,21 +2,17 @@
 	require_once('./includes/connectlocal.inc');
 
 	session_start();
-
-	ini_set('display_errors', '1');
-	ini_set('display_startup_errors', '1');
-	error_reporting(E_ALL);
 	?>
 	<nav class="navbar fixed-top navbar-expand-lg">
 
-		<div class="container-fluid ps-5 pt-2 text-shadow-1">
+		<div class="container-fluid ps-4 pt-2 text-shadow-1">
 
 			<a href="index.php">
-				<img src="./images/logo.svg" alt="logo-banner" class="navbar-brand ms-2 p-0" width="300px">
+				<img src="./images/logo.svg" alt="logo-banner" class="navbar-brand ms-4 p-0 logo-nav">
 			</a>
 
-			<button class="navbar-toggler me-4 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="nav_button">
-				<span class="navbar-toggler-icon text-primary">
+			<button class="navbar-toggler me-4 bg-light text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="nav_button">
+				<span class="navbar-toggler-icon text-light">
 				</span>
 			</button>
 			<div id="navbarNav" class="collapse navbar-collapse">
@@ -25,10 +21,10 @@
 						<a class="nav-link text-primary fw-normal" href="reunion.php">Centenary Reunion</a>
 					</li>
 					<li class="nav-item px-2">
-						<a class="nav-link text-primary fw-normal" href="">History</a>
+						<a class="nav-link text-primary fw-normal" href="history.php">History</a>
 					</li>
 					<li class="nav-item px-2">
-						<a class="nav-link text-primary fw-normal" href="">About</a>
+						<a class="nav-link text-primary fw-normal" href="about.php">About</a>
 					</li>
 					<li class="nav-item px-2">
 						<a class="nav-link text-primary fw-normal" href="store.php">Store</a>
@@ -66,7 +62,7 @@
 				<?php
 				if (isset($_SESSION['login'])) {
 
-					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-md-5' pe-sm-3>
+					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-md-5 pe-sm-3'>
 					<button type='button' class='nav-item btn btn-tertiary navbar-btn btn-sm text-capitalize text-white me-2'id='btn_logout' style='--bs-btn-padding-y: 0.5rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: 0.8rem; border-color: #000000;'>Logout</button> </div>";
 				} else {
 					echo "<div class='navbar navbar-nav d-flex align-items-center justify-content-center pe-3'>

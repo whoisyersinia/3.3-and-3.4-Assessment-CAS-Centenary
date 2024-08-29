@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 	<div class="container-fluid ps-5 pt-2 text-shadow-1">
 
 		<a href="index.php">
-			<img src="./images/logolight.svg" alt="logo-banner" class="navbar-brand ms-2 p-0" width="500px">
+			<img src="./images/logolight.svg" alt="logo-banner" class="navbar-brand ms-2 p-0 logo-nav-light" width="500px">
 		</a>
 
 		<button class="navbar-toggler me-4 bg-light text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="nav_button_light">
@@ -25,10 +25,10 @@ error_reporting(E_ALL);
 					<a class="nav-link text-light fw-normal" href="reunion.php">Centenary Reunion</a>
 				</li>
 				<li class="nav-item px-2">
-					<a class="nav-link text-light fw-normal" href="">History</a>
+					<a class="nav-link text-light fw-normal" href="history.php">History</a>
 				</li>
 				<li class="nav-item px-2">
-					<a class="nav-link text-light fw-normal" href="">About</a>
+					<a class="nav-link text-light fw-normal" href="about.php">About</a>
 				</li>
 				<li class="nav-item px-2">
 					<a class="nav-link text-light fw-normal" href="store.php">Store</a>

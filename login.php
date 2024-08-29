@@ -16,10 +16,10 @@ if (!empty($_GET['s'])) {
 		</div>";
 	header("refresh:;url=login.php");
 }
+$errors = array();
 
 if (isset($_POST['login'])) {
 	//email validation - if empty
-	$errors = array();
 
 	if (!empty($_POST['email_user'])) {
 		$e = mysqli_real_escape_string($conn, $_POST['email_user']);
@@ -98,17 +98,19 @@ if (isset($_POST['login'])) {
 }
 ?>
 <?php
+
 if ($errors) {
 	echo "<div class='alert alert-danger alert-dismissable d-flex align-items-center fade show fixed-top' role='alert'>";
 	echo "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-exclamation-triangle-fill flex-shrink-0 me-2' viewBox='0 0 16 16' role='img' aria-label='Warning:'>
-		<path d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/>
-	</svg>";
+			<path d='M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/>
+		</svg>";
 
 	echo array_values($errors)[0];
 
 	echo "<button type='button' class='btn-close position-absolute top-25 end-0 me-3' data-bs-dismiss='alert' aria-label='Close'></button>     
-		</div>";
+			</div>";
 };
+
 ?>
 
 <title>Login - CAS 100</title>
@@ -131,7 +133,7 @@ if ($errors) {
 							<label for="floatingPassword">Password</label>
 						</div>
 						<div class="checkbox mb-3 mt-2">
-							<p class="text-info">Don't have an account?<a href="register.php" class="text-primary text-decoration-none"> Sign up now.</a></p>
+							<p class="text-primary">Don't have an account?<a href="register.php" class="text-info text-decoration-none"> Sign up now.</a></p>
 						</div>
 						<button class="w-100 btn btn-lg btn-primary" type="submit" name="login">Sign in</button>
 						<p class="mt-5 mb-3 text-muted">&copy; Christchurch Adventist School 2024-2025</p>

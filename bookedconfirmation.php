@@ -88,7 +88,7 @@ if (isset($_GET['id'])) {
 	$mail->Body = $mailContent;
 
 	if ($mail->send()) {
-		header("Location: reunion.php?s=confirm");
+		header("Location: confirmedbook.php?id=$id");
 	} else {
 		echo 'Message could not be sent.';
 		echo 'Mailer Error: ' . $mail->ErrorInfo;

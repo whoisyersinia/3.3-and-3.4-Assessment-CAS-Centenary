@@ -66,12 +66,12 @@ if (!empty($_GET['s'])) {
 		</div>
 		<div class="col-md-5 text-end m-0 fade-right reveal_once ">
 			<h2 class="fw-bold ">A time for <span class="text-primary text_effect">Celebration.</span></h2>
-			<p>Join us as we celebrate and commemorate the 100th Centenary of Christhurch Adventist School. From the 25 to 27th of April 2025, we will hold a series of events to celebrate the school's history and achievements. This event is open for our former students, friends and family. Save your spot by booking here!</p>
+			<p>Join us as we celebrate and commemorate the 100th Centenary of Christchurch Adventist School. From the 25 to 27th of April 2025, we will hold a series of events to celebrate the school's history and achievements. This event is open for our former students, friends and family. Save your spot by booking here!</p>
 			</p>
 			<button type='button' class='btn btn-primary btn-rounded btn-lg px-4 w-50' style='--bs-btn-padding-y: 0.75rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 0.9rem; border-color: #ffffff;' id='sign_up' onclick="window.location.href=' rsvp.php'">Book Now</button>
 		</div>
-
 	</div>
+</div>
 
-	<?php
-	require_once('footer.php');
+<?php
+require_once('footer.php');

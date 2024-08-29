@@ -116,7 +116,7 @@ while ($row = mysqli_fetch_assoc($r)) {
 		<form method="GET">
 			<div class=" d-inline-flex gap-2 container-fluid">
 				<i class="fa-solid text-primary fa-magnifying-glass justify-content-center align-self-center fa-xl"></i>
-				<input class="form-control me-2" type="search" placeholder="Search for order id" aria-label="Search" name="searchterm" value="<?php if (isset($_GET['searchterm'])) echo $_GET['searchterm']; ?>">
+				<input class="form-control me-2" type="search" placeholder="Search for booking id" aria-label="Search" name="searchterm" value="<?php if (isset($_GET['searchterm'])) echo $_GET['searchterm']; ?>">
 				<button class="btn btn-outline-primary " type="submit" name="search">Search</button>
 			</div>
 			<div class="d-inline-flex gap-2 mx-3">
@@ -150,7 +150,7 @@ while ($row = mysqli_fetch_assoc($r)) {
 		</table>";
 		} else {
 			echo "<h2 class='fw-bold text-primary d-flex justify-content-center pt-3'>No results found!</h2>";
-			echo "<h3><a class='fw-bold text-info d-flex justify-content-center' href='order.php'>Show all bookings</a></h3>";
+			echo "<h3><a class='fw-bold text-info d-flex justify-content-center' href='event.php'>Show all bookings</a></h3>";
 		}
 		?>
 

@@ -32,20 +32,12 @@ if (isset($_POST['regi'])) {
 		$al = 0;
 	}
 
-	if (empty($_POST['first_name'] || empty($_POST['last_name']) || empty($_POST['phone']))) {
+	if (empty($_POST['first_name']) || empty($_POST['last_name'])) {
 		array_push($errors, "Fields empty!");
 	} else {
 		$first_name = $_POST['first_name'];
 		$last_name = $_POST['last_name'];
 
-		// trim whitespace
-		$trimmed_ph = preg_replace('/\s+/', '', $_POST['phone']);
-
-		if (preg_match('/^0[0-9]{9}$/', $trimmed_ph)) {
-			$ph = mysqli_real_escape_string($conn, $trimmed_ph);
-		} else {
-			array_push($errors, "Phone number is invalid or empty!");
-		}
 
 		if (strlen($first_name) > 2) {
 			if (strlen($first_name) < 255) {
@@ -67,10 +59,19 @@ if (isset($_POST['regi'])) {
 			array_push($errors, "Your last name is less than 2 characters long!");
 		}
 	}
+
+	if (!empty($_POST['phone'])) {
+		$trimmed_ph = preg_replace('/\s+/', '', $_POST['phone']);
+		$ph = mysqli_real_escape_string($conn, $trimmed_ph);
+	} else {
+		$ph = NULL;
+	}
+	// trim whitespace
+
 }
 
 // if ok
-if ($fn && $ln && $ph) {
+if ($fn && $ln && ($ph !== FALSE)) {
 
 	//check if user already booked
 	$check_booked = "SELECT * FROM `rsvp` WHERE `user_id` = '$userid'";
@@ -129,7 +130,7 @@ if ($errors) {
 			</div>
 			<div class="col-md-6 col-sm-3 justify-content-center align-content-center">
 				<main class="text-center w-auto m-auto px-5 mx-5 py-4">
-					<form method="POST">
+					<form method="POST" id="rsvp">
 						<h1 class="h1 mb-3 fw-semibold text-primary">Book Event</h1>
 						<div class="d-flex gap-3">
 							<div class="form-floating w-50">
@@ -158,14 +159,14 @@ if ($errors) {
 							<label for="floatingInput">Email address<span class="text-warning">*</span></label>
 						</div>
 
-						<label class="d-flex form-floating justify-content-start pt-3" for="phone">Phone Number<span class="text-warning">*</span></label>
+						<label class="d-flex form-floating justify-content-start pt-3" for="phone">Phone Number</label>
 						<div class="d-flex form-floating justify-content-start flex-column">
 							<input name="phone" type="tel" id="phone" class="form-control border border-3 border-info">
 						</div>
 
 						<div class="form-check d-flex justify-content-start pt-3">
-							<input class="form-check-input" type="checkbox" name="casalumni" id="casalumni">
-							<label class="form-check-label ps-1">
+							<input class="form-check-input p-2" type="checkbox" name="casalumni" id="casalumni">
+							<label class="form-check-label ps-2 pt-1">
 								Are you a CAS Alumni?
 							</label>
 						</div>
@@ -180,6 +181,18 @@ if ($errors) {
 					</form>
 				</main>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Processing your request...</h1>
+			</div>
+			<p class="fs-5 text-warning px-2">Please do not exit this page!</p>
+			<img src="./images/loadingcute.gif" alt="loading gif" class="img-fluid ">
 		</div>
 	</div>
 </div>
