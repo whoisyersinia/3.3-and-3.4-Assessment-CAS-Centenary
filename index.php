@@ -179,7 +179,7 @@ require_once('header.php');
 						<h4 style="color:#2F4582;">Our Vision</h4>
 						<blockquote class="blockquote">
 							<p>
-								<span class="lead font-italic">To go beyond one hallway...
+								<span class="lead font-italic">To go beyond one hallway and to be a school that is known for its commitment to excellence in all areas of school life. To be a school that is known for its commitment to excellence.
 									Celebrating GROWTH is allowing time for the recognition of achievement in all areas of the GROWTH vision, both small and great.
 
 								</span>

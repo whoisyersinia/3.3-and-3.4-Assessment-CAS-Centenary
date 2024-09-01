@@ -2,9 +2,6 @@
 require_once('./includes/connectlocal.inc');
 require_once('./includes/basehead.html');
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 if (
 	isset($_GET['x'], $_GET['y'])
 	&& filter_var($_GET['x'], FILTER_VALIDATE_EMAIL) && (strlen($_GET['y']) == 32)

@@ -2,10 +2,6 @@
 require_once('./includes/basehead.html');
 require_once('header.php');
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 if (!empty($_GET['s'])) {
 	if ($_GET['s'] === "del") {
 		echo "<div class='alert alert-success alert-dismissable d-flex align-items-center fade show fixed-top' role='alert'>";

@@ -7,10 +7,6 @@ session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 if (isset($_GET['id'], $_GET['order_id'])) {
 	$id = $_GET['id'];
 	$current_userid = $_SESSION['id'];

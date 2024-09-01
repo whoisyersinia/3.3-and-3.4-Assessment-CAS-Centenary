@@ -2,10 +2,6 @@
 require_once('./includes/basehead.html');
 require_once('header.php');
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 if (!isset($_SESSION['login'])) {
 	header("Location: login.php?s=req");
 } else {
@@ -168,7 +164,7 @@ if ($errors) {
 
 
 
-<body>
+<body class="d-flex flex-column vh-100">
 	<form method="post" id="checkout">
 		<div class="row container-fluid pt-5 mt-5">
 			<div class="col-md-8">

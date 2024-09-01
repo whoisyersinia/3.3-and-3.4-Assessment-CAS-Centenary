@@ -2,10 +2,6 @@
 require_once('./includes/basehead.html');
 require_once('header.php');
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 if (isset($_GET['id'])) {
 	//check if order exists 
 	$id = $_GET['id'];
@@ -100,7 +96,7 @@ if (isset($_GET['id'])) {
 
 
 <body>
-	<div class="row container-fluid pt-5 mt-5">
+	<div class="row container-fluid pt-5 mt-5 pb-5">
 		<div class="col-md-8 ">
 			<div class="d-flex justify-content-between">
 				<h1 class="text-primary px-5">Order #<?php echo $order_id ?> Cart</h1>
@@ -141,7 +137,7 @@ if (isset($_GET['id'])) {
 		</div>
 		<div class="row container-fluid ">
 			<div class="col-md-8"></div>
-			<div class="col-md-4 border rounded-3 border-gray border-1 checkout_box p-5 mt-5">
+			<div class="col-md-4 border rounded-3 border-gray border-1 checkout_box_1 p-5 mt-5">
 				<div class="mx-auto">
 					<div class="d-flex justify-content-between ">
 						<p class="">Subtotal</p>

@@ -4,12 +4,6 @@ require_once("./includes/connectlocal.inc");
 
 session_start();
 
-
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-
 // check if user has logged in - if not 403 foribbden error
 
 if (isset($_SESSION['login'])) {
